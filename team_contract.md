@@ -11,3 +11,4 @@
 ### Electronic Signatures
 * Sumin Cho, suminc2
 * Sarah Matatov, matatov
+* Emily Crawford, emilyc7
