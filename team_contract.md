@@ -10,3 +10,4 @@
 3. **Conflict Resolution** All conflicts within the group will be subject to a vote. In the event of a tie, we will hold an open discussion to allow each member to state their side. In the event of another tie, we will consult our team mentor to try and resolve the conflict.
 ### Electronic Signatures
 * Sumin Cho, suminc2
+* Sarah Matatov, matatov
