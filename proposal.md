@@ -9,20 +9,21 @@ Our project will use a BFS traversal to traverse the graph and find the nodes of
 - We will acquire the data directly from the Stanford Network Analysis Project website, under the wiki-topcats dataset.
 - We will process the data using the Stanford Network Analysis Platform, a network analysis and graph mining library. Since the graph is preprocessed from Wikipedia, we do not anticipate many issues. However, if needed, we will use SNAP to classify and connect nodes.
 - In the event of an invalid input, or one which does not exist in the dataset (since the dataset only includes wikipedia articles which are linked > 100 times) the program will return that the input is not valid or does not have enough connections to compute a path.
+- Since the dataset is limited to only Wikipedia pages with 100+ hyperlinks referencing them, the diameter of the graph is 9. We expect that this limitation will allow us to overcome any runtime or storage issues that may have otherwise interfered with the project.
 ## Graph Algorithms
 - The graph traversal algorithm we will use:
     - BFS
         - Input: a single Wikipedia Article
         - Output: location of the node
         - Expected Big O: O(n)
-    - Shortest Path
+    - Shortest Path (Dijkstra's Algorithm)
         - Input: two Wikipedia article names
         - Output: the path between the nodes
-        - Expected Big O: O(E + V* log(V))
+        - Expected Big O: O(|E| + |V|* log(V))
     - Force-directed graph drawing
-        - Input: N/A
+        - Input: All vertices and edges in the graph dataset
         - Output: an interactive, colored force-directed graph containing all of the nodes and edges in our dataset.
-        - Expected Big O: O(n)
+        - Expected Big O: O(n^3)
 ## Timeline
 - Week of Nov 7
     - Familiarize ourselves with [SNAP](http://snap.stanford.edu/proj/snap-icwsm/) and making graphs in C++ using basic datasets
