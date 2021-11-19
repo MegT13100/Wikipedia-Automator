@@ -1,8 +1,8 @@
 # Final Project Proposal
 ## Leading Question
-The Wiki Game, or the Wikipedia Race, is a popular game in which two players start on a randomly selected wikipedia page and must navigate through the hyperlinks within the page to a preselected target article. The fastest player wins. *Our project aims to automate the game and return the shortest hyperlink path between any two articles within Wikipedia. In addition, the user will be able to determine how "important" each article is in the graph to make the chosen articles easier or harder to link.*
+The Wiki Game, or the Wikipedia Race, is a popular game in which two players start on a randomly selected wikipedia page and must navigate through the hyperlinks within the page to a preselected target article. The fastest player wins. *Our project aims to automate the game and return the shortest hyperlink path between any two articles within Wikipedia. In addition, the user will be able to determine how "important" each article is in the graph to make the chosen articles easier or harder to link together.*
 
-Our project will use a BFS traversal to traverse the graph and find the nodes of interest (article names which the user inputs). BFS will also be used to find the shortest path between these two nodes and will return this path to the user. Page-Rank will be used to conceptually weigh the nodes (articles) in the graph and allow a user to input an article name and recieve it's importance in relation to the rest of the articles. The force-directed graph drawing will create a visualization of the entire dataset which the user can explore.
+Our project will use a BFS traversal to traverse the graph and find the nodes of interest (article names which the user inputs). BFS will also be used to find the shortest path between two nodes (articles) and will return this path to the user. Page-Rank will be used to conceptually weigh the nodes (articles) in the graph and allow a user to input an article name and recieve it's importance in relation to the rest of the articles. The force-directed graph drawing will create a visualization of the entire dataset which the user can explore.
 
 ## Data Acquisition
 - We are using the publicly available data from Stanford Large Network Dataset Collection of wikipedia hyperlinks
@@ -31,9 +31,9 @@ Our project will use a BFS traversal to traverse the graph and find the nodes of
     - Learn/research algorithms as necessary
     - Download, store, and organize our data of Wikipedia hyperlinks
     - Process data in graph notations (nodes and edges) in C++
-    - Get started on BFS (and other algorithms)
 - Week of Nov 21 (Thanksgiving)
-    - BFS (everyone)
+    - Finish data processing if necessary
+    - Get started on BFS and other algorithms (everyone)
 - Week of Nov 28
     - ½ Page Rank (Sumin & Meghan)
     - ½ Force-Directed graph drawing (Emily & Sarah)
