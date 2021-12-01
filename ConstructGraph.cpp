@@ -13,7 +13,7 @@ using std::vector;
 using std::ifstream;
 using namespace std;
 
-void ConstructGraph(const string& filename, const string& filename2) {
+void constructGraph(const string& filename, const string& filename2) {
     // Construct graph
     vector<Vertex> vertices;
     string line;
