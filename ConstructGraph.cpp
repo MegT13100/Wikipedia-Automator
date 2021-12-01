@@ -2,7 +2,7 @@
 
 #include <cstdio>
 #include <vector>
-#include <algorithm> /* I wonder why this is included... */
+#include <algorithm> 
 #include <fstream>
 #include <iostream>
 #include <string> 

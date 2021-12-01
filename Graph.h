@@ -37,4 +37,6 @@ void printGraph(Graph const * const g);*/
 
 Graph* createVertices(int numV);
 
+void ConstructGraph(const string& filename, const string& filename2);
+
 #endif
