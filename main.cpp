@@ -6,5 +6,6 @@ using namespace std;
 int main() {
    //building the graph from the wikipedia files
    Graph g;
-   cout << "2" <<endl;
+   cout << "main runs" << endl;
+   //g.constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt");
 }

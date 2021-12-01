@@ -17,6 +17,8 @@ main.o: main.cpp Graph.cpp ConstructGraph.cpp
 clean:
 	-rm -f *.o $(EXENAME)
 
+# Use the cs225 makefile template:
+include cs225/make/cs225.mk
 
 #EXENAME = intro
 #OBJS = PNG.o HSLAPixel.o lodepng.o Graph.o ConstructGraph.o main.o
