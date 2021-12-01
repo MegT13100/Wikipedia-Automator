@@ -25,5 +25,5 @@ void ConstructGraph(const string& filename, const string& filename2) {
     }
     infile.close();
 
-    Graph* g = createVertices(count);
+    Graph* g = createVertices(vertices.size());
 }
