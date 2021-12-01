@@ -1,5 +1,5 @@
 EXENAME = intro
-OBJS = PNG.o HSLAPixel.o lodepng.o Graph.o main.o
+OBJS = PNG.o HSLAPixel.o lodepng.o Graph.o ConstructGraph.o main.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -35,6 +35,9 @@ $(EXENAME): output_msg $(OBJS)
 Graph.o: main.cpp Graph.cpp cs225/PNG.h cs225/HSLAPixel.h
 	$(CXX) $(CXXFLAGS) main.cpp Graph.cpp
 
+ConstructGraph.o: main.cpp ConstructGraph.cpp cs225/PNG.h cs225/HSLAPixel.h
+	$(CXX) $(CXXFLAGS) main.cpp ConstructGraph.cpp
+
 PNG.o: cs225/PNG.cpp cs225/PNG.h cs225/HSLAPixel.h cs225/lodepng/lodepng.h
 	$(CXX) $(CXXFLAGS) cs225/PNG.cpp
 
@@ -45,8 +48,8 @@ lodepng.o: cs225/lodepng/lodepng.cpp cs225/lodepng/lodepng.h
 	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp
 
 
-test: output_msg tests.o PNG.o HSLAPixel.o lodepng.o Graph.o
-	$(LD) tests.o PNG.o HSLAPixel.o lodepng.o Graph.o $(LDFLAGS) -o test
+test: output_msg tests.o PNG.o HSLAPixel.o lodepng.o Graph.o ConstructGraph.o
+	$(LD) tests.o PNG.o HSLAPixel.o lodepng.o Graph.o ConstructGraph.o $(LDFLAGS) -o test
 
 tests.o: tests/tests.cpp tests/catch.hpp cs225/PNG.h cs225/HSLAPixel.h
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
