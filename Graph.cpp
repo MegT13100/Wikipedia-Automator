@@ -7,6 +7,7 @@
 using namespace std;
 
 bool containsEdge(Graph const * const g, int src, int dest) {
+    //if the relationship between these two vertices is marked true in the adjacency matrix, then the edge exists
     if(g->adjMatrix[src][dest]) {
         return true;
     }
@@ -14,10 +15,12 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 }
 
 void addEdge(Graph* g, int src, int dest) {
+    //add an edge between the given vertices, since this is an undirected graph, need to add it in both directions.
     g->adjMatrix[src][dest] = 1;
+    g->adjMatrix[dest][src] = 1;
 }
 
-int numOutgoingEdges(Graph const * const g, int v) {
+/*int numOutgoingEdges(Graph const * const g, int v) {
     int count = 0;
     for(int i = 0; i < g->n; i++) {
         if( g->adjMatrix[v][i] == 1) {
@@ -46,10 +49,10 @@ void printGraph(Graph const * const g) {
                 }
                 cout << "\n\n";
         }
-}
+}*/
 
 Graph* createVertices(int numV) {
-    // No need to modify this function
+    //creates an empty graph with numV vertices and initializes all edges to false
     Graph* g = new Graph();
     g->n = numV;
     g->adjMatrix = new bool*[numV];
