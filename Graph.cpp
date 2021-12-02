@@ -89,7 +89,6 @@ Graph* constructGraph(const string& filename, const string& filename2) {
         while (getline(infile, line)) {
             // push all of the vertices
             //make sure that input file vertices are sorted!!!
-            cout << line.substr(2) << " " << count << endl;
             vertices.push_back(Vertex(line.substr(2), count));
             count++;
         }
@@ -103,7 +102,6 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             // push all of the vertices
             std::istringstream is( line);
             int src, dest; is >> src >> dest;
-            cout << src << " " << dest << endl;
             addEdge(g, src, dest);
         }
     }

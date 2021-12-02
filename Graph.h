@@ -6,10 +6,6 @@
 #define _GRAPH_
 using namespace std;
 
-struct Graph {
-        bool** adjMatrix;
-        int n;
-};
 struct Vertex {
         Vertex() {
                 name_ = "";
@@ -24,6 +20,11 @@ struct Vertex {
         string name_;
         int index_;
         string parent_;
+};
+struct Graph {
+        bool** adjMatrix;
+        int n;
+        vector<Vertex> vertices;
 };
 
 bool containsEdge(Graph const * const g, int src, int dest);

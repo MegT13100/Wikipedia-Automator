@@ -7,10 +7,14 @@
 using cs225::HSLAPixel;
 using cs225::PNG;
 
-/*TEST_CASE("Fake data vertices added correctly", "[weight=1]") {
+TEST_CASE("Fake data vertices added correctly", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
-  REQUIRE( ...);
-}*/
+  vector<string> v = {"animals", "dog", "cat", "wolf", "cat", "food", "soup", "mac and cheese"};
+  for(int n = 0; n < (int) g->vertices.size(); n++) {
+    REQUIRE(v[n] == g->vertices[n].name_);
+    cout << v[n] << " " << g->vertices[n].name_ <<  endl;
+  }
+}
 
 TEST_CASE("Fake data edges added correctly", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
