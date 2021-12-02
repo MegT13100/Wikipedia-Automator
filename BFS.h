@@ -2,6 +2,7 @@
 
 #include "Graph.h"
 #include <map>
+#include <queue>
 
 enum Label { UNEXPLORED, DISCOVERY, CROSS }
 
@@ -12,4 +13,5 @@ class BFS {
     private:
         Graph graph_;
         map<Vertex, bool> visited_;
+        queue q;
 };
