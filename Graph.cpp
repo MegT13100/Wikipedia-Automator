@@ -85,7 +85,6 @@ Graph* createVertices(int numV) {
     return g;
 }
 
-
 Graph* constructGraph(const string& filename, const string& filename2) {
     // Construct graph
     vector<Vertex> vertices;
@@ -129,3 +128,11 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     infile2.close();
     return g;
 }
+
+/*vector<Vertex> getVertices()  {
+    return vector<Vertex>();
+}
+
+vector<Edge> getEdges()  {
+    return vector<Edge>();
+}*/
