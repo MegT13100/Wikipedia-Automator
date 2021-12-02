@@ -84,53 +84,24 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     if (infile.is_open()) {
         while (getline(infile, line)) {
             // push all of the vertices
-            /*vector<string> v;
-            const char delim = ' '; 
-            std::vector<std::string> out; 
-            std::stringstream ss(line); 
-            std::string s;
-            while (std::getline(ss, s, delim)) { 
-                out.push_back(s); 
-            } 
-            for (auto &s: out) { 
-                v.push_back(s);
-            } */
-            vertices.push_back(Vertex(line, count));
+            //make sure that input file vertices are sorted!!!
+            vertices.push_back(Vertex(line.substr(2), count));
             count++;
         }
     }
     infile.close();
     Graph* g = createVertices(vertices.size());
-    return g;
-    
-    /*ifstream infile2(filename2);
+
+    ifstream infile2(filename2);
     if (infile2.is_open()) {
         while (getline(infile2, line)) {
             // push all of the vertices
-            vector<string> v;
-            string n;
-            const char delim = ' '; 
-            std::vector<std::string> out; 
-            std::stringstream ss(line); 
-            std::string s;
-            while (std::getline(ss, s, delim)) { 
-                out.push_back(s); 
-            } 
-            for (auto &s: out) { 
-                if(count != 0) {
-                    n += s;
-                }
-            } 
-            v.push_back(s);
-            //converts the string number into an int, found on stackoverflow, feel free to modify to be more elegant
-            int src;
-            int dest;
-            stringstream first(v[0]);
-            stringstream second(v[1]);
-            first >> src;
-            second >> dest;
+            std::istringstream is( line);
+            int src, dest; is >> src >> dest;
+            cout << src << " " << dest << endl;
             addEdge(g, src, dest);
         }
     }
-    infile2.close();*/
+    infile2.close();
+    return g;
 }
