@@ -1,0 +1,8 @@
+0 animals
+1 dog
+2 cat
+3 wolf
+4 cow
+5 food
+6 soup
+7 mac and cheese
