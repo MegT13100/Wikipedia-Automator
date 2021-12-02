@@ -15,6 +15,10 @@ using std::ifstream;
 using namespace std;
 
 bool containsEdge(Graph const * const g, int src, int dest) {
+    //add check for too large of an input
+    if(src == dest) {
+        return true;
+    }
     //if the relationship between these two vertices is marked true in the adjacency matrix, then the edge exists
     if(g->adjMatrix[src][dest]) {
         return true;
@@ -85,6 +89,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
         while (getline(infile, line)) {
             // push all of the vertices
             //make sure that input file vertices are sorted!!!
+            cout << line.substr(2) << " " << count << endl;
             vertices.push_back(Vertex(line.substr(2), count));
             count++;
         }

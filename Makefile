@@ -1,6 +1,5 @@
-EXENAME = main
-EXE_OBJ = main.o
-OBJS = Graph.o main.o
+EXENAME = graph
+OBJS = main.o PNG.o HSLAPixel.o lodepng.o Graph.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -24,20 +23,42 @@ CLANG_VERSION_MSG = $(warning $(ccyellow) Looks like you are not on EWS. Be sure
 endif
 endif
 
-all: $(EXENAME)
+.PHONY: all test clean output_msg
 
-$(EXENAME): $(OBJS)
-	$(LD) $^ $(LDFLAGS) -o $@
+all : $(EXENAME)
 
-main.o: main.cpp Graph.h 
-	$(CXX) $< $(CXXFLAGS) Graph.cpp 
+output_msg: ; $(CLANG_VERSION_MSG)
 
-Graph.o: Graph.cpp Graph.h 
-	$(CXX) $< $(CXXFLAGS) 
-	
-clean:
-	-rm -f *.o $(EXENAME)
+$(EXENAME) : output_msg $(OBJS)
+	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-#Use the cs225 makefile template:
-#include cs225/make/cs225.mk
+main.o : main.cpp Graph.h cs225/PNG.h cs225/HSLAPixel.h
+	$(CXX) $(CXXFLAGS) main.cpp
+
+Graph.o : Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) Graph.cpp
+
+PNG.o : cs225/PNG.cpp cs225/PNG.h cs225/HSLAPixel.h cs225/lodepng/lodepng.h
+	$(CXX) $(CXXFLAGS) cs225/PNG.cpp
+
+HSLAPixel.o : cs225/HSLAPixel.cpp cs225/HSLAPixel.h
+	$(CXX) $(CXXFLAGS) cs225/HSLAPixel.cpp
+
+lodepng.o : cs225/lodepng/lodepng.cpp cs225/lodepng/lodepng.h
+	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp
+
+test: output_msg catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o
+	$(LD) catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o $(LDFLAGS) -o test
+
+catchmain.o : cs225/catch/catchmain.cpp cs225/catch/catch.hpp
+	$(CXX) $(CXXFLAGS) cs225/catch/catchmain.cpp
+
+tests-part1.o : tests/tests-part1.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) tests/tests-part1.cpp
+
+tests-part2.o : tests/tests-part2.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) tests/tests-part2.cpp
+
+clean :
+	-rm -f *.o $(EXENAME) test
 
