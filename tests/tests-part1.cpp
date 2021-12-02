@@ -24,6 +24,7 @@ TEST_CASE("Fake data edges added correctly", "[weight=1]") {
   REQUIRE( containsEdge(g, 0, 4) == false);
   REQUIRE( containsEdge(g, 5, 3) == false);
   REQUIRE( containsEdge(g, 7, 6) == false);
+  REQUIRE( containsEdge(g, 8, 6) == false);
 }
 
 /*TEST_CASE("Adjacency matrix prints correctly", "[weight=1]") {
