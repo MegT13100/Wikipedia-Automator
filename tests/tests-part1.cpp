@@ -27,7 +27,19 @@ TEST_CASE("Fake data edges added correctly", "[weight=1]") {
   REQUIRE( containsEdge(g, 8, 6) == false);
 }
 
-/*TEST_CASE("Adjacency matrix prints correctly", "[weight=1]") {
-    Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
-  REQUIRE( ...);
+/*TEST_CASE("Adjacency matrix is correct", "[weight=1]") {
+  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+  bool** answer = new bool[8][8]
+    {
+      {true, true, true, true, false, false, false, false}, 
+      {true, true, false, true, false, false, false, false}, 
+      {true, false, true, false, false, false, false, false}, 
+      {true, true, false, true, false, false, false, false}, 
+      {false, false, false, false, true, true, false, false},
+      {false, false, false, false, true, true, true, true}, 
+      {false, false, false, false, false, true, true, false}, 
+      {false, false, false, false, false, true, false, true}
+    };
+  REQUIRE(answer == g->adjMatrix);
+  delete answer;
 }*/

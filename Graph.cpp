@@ -75,7 +75,11 @@ Graph* createVertices(int numV) {
     for (int i = 0; i < numV; i += 1) {
         g->adjMatrix[i] = new bool[numV];
         for (int j = 0; j < numV; j += 1) {
-            g->adjMatrix[i][j] = 0;
+            if(i == j) {
+                g->adjMatrix[i][j] = 1;
+            } else {
+                g->adjMatrix[i][j] = 0;
+            }
         }
     }
     return g;
