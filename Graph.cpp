@@ -46,7 +46,7 @@ int numIncomingEdges(Graph const * const g, int v) {
         }
     }
     return count;
-}
+}*/
 
 void printGraph(Graph const * const g) {
         cout << "Adjacency Matrix: " << endl;
@@ -57,7 +57,7 @@ void printGraph(Graph const * const g) {
                 }
                 cout << "\n\n";
         }
-}*/
+}
 
 Graph* createVertices(int numV) {
     //creates an empty graph with numV vertices and initializes all edges to false
@@ -71,4 +71,66 @@ Graph* createVertices(int numV) {
         }
     }
     return g;
+}
+
+
+Graph* constructGraph(const string& filename, const string& filename2) {
+    // Construct graph
+    vector<Vertex> vertices;
+    string line;
+    int count = 0;
+    //read in the file with all of the vertex names, the index of the vertex name in the vector is the vertex number it is in the adjacency matrix
+    ifstream infile (filename);
+    if (infile.is_open()) {
+        while (getline(infile, line)) {
+            // push all of the vertices
+            /*vector<string> v;
+            const char delim = ' '; 
+            std::vector<std::string> out; 
+            std::stringstream ss(line); 
+            std::string s;
+            while (std::getline(ss, s, delim)) { 
+                out.push_back(s); 
+            } 
+            for (auto &s: out) { 
+                v.push_back(s);
+            } */
+            vertices.push_back(Vertex(line, count));
+            count++;
+        }
+    }
+    infile.close();
+    Graph* g = createVertices(vertices.size());
+    return g;
+    
+    /*ifstream infile2(filename2);
+    if (infile2.is_open()) {
+        while (getline(infile2, line)) {
+            // push all of the vertices
+            vector<string> v;
+            string n;
+            const char delim = ' '; 
+            std::vector<std::string> out; 
+            std::stringstream ss(line); 
+            std::string s;
+            while (std::getline(ss, s, delim)) { 
+                out.push_back(s); 
+            } 
+            for (auto &s: out) { 
+                if(count != 0) {
+                    n += s;
+                }
+            } 
+            v.push_back(s);
+            //converts the string number into an int, found on stackoverflow, feel free to modify to be more elegant
+            int src;
+            int dest;
+            stringstream first(v[0]);
+            stringstream second(v[1]);
+            first >> src;
+            second >> dest;
+            addEdge(g, src, dest);
+        }
+    }
+    infile2.close();*/
 }
