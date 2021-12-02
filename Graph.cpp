@@ -95,7 +95,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     }
     infile.close();
     Graph* g = createVertices(vertices.size());
-
+    g->vertices = vertices;
     ifstream infile2(filename2);
     if (infile2.is_open()) {
         while (getline(infile2, line)) {
