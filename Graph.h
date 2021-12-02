@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 
 #ifndef _GRAPH_
@@ -24,6 +25,14 @@ struct Vertex {
         string name_;
         int index_;
 };
+struct Edge {
+        Edge(Vertex u, Vertex v) {
+                this->u = u;
+                this->v = v;
+        }
+        Vertex u;
+        Vertex v;
+}
 
 bool containsEdge(Graph const * const g, int src, int dest);
 
@@ -38,5 +47,9 @@ void printGraph(Graph const * const g);*/
 Graph* createVertices(int numV);
 
 void constructGraph(const string& filename, const string& filename2);
+
+vector<Vertex> getVertices() const;
+
+vector<Edge> getEdges() const;
 
 #endif

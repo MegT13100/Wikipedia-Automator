@@ -72,3 +72,11 @@ Graph* createVertices(int numV) {
     }
     return g;
 }
+
+vector<Vertex> getVertices() const {
+    return vector<Vertex>();
+}
+
+vector<Edge> getEdges() const {
+    return vector<Edge>();
+}
