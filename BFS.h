@@ -10,6 +10,7 @@ class BFS {
     public:
         BFS(Graph * g);
         void traverse(Graph * g, Vertex v);
+        vector<string> shortestPath(Graph * g, string v1, string v2);
     private:
         //Graph * graph_;
         map<Vertex, bool> visited_;

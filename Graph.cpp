@@ -34,6 +34,7 @@ void addEdge(Graph* g, int src, int dest) {
     //add an edge between the given vertices, since this is an undirected graph, need to add it in both directions.
     g->edges[src][dest]= Edge(g->vertices[src], g->vertices[dest]);
     g->edges[dest][src]= Edge(g->vertices[src], g->vertices[dest]);
+    g->edgeList.push_back(Edge(g->vertices[src], g->vertices[dest]));
     g->adjMatrix[src][dest] = 1;
     g->adjMatrix[dest][src] = 1;
 }

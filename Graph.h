@@ -13,31 +13,31 @@ struct Vertex {
         Vertex() {
                 name_ = "";
                 index_ = -1;
-                string parent_ = "";
-                label = "UNEXPLORED";
+                parent_ = -1;
+                distance_ = 0;
+                
         }
         Vertex(string name, int index) {
                 name_ = name;
                 index_ = index;
-                label = "UNEXPLORED";
+                parent_ = -1;
+                distance_ = 0;
         }
         string name_;
         int index_;
-        string parent_;
+        int parent_;
         int distance_;
-        //vector<int> AdjEdges;
+        vector<Vertex> adjacent;
         string label;
 };
 struct Edge {
         Edge() {
                 u = Vertex();
                 v = Vertex();
-                label = "UNEXPLORED";
         }
         Edge(Vertex u, Vertex v) {
                 this->u = u;
                 this->v = v;
-                label = "UNEXPLORED";
         }
         Vertex u;
         Vertex v;
@@ -50,10 +50,12 @@ struct Graph {
         int n;
         //vector of all vertices
         vector<Vertex> vertices;
-        //vector of all edges (make 2D)
+        //vector of all edges
+        vector<Edge> edgeList;
+        //vector of all edges indexed by the verticies that it is a part of
         vector<vector<Edge>> edges;
         //map that contains all the adjacent edges for a given vertex
-        std::unordered_map<int, vector<Vertex>> adjacent;
+        //std::unordered_map<int, vector<Vertex>> adjacent;
 };
 
 bool containsEdge(Graph const * const g, int src, int dest);
