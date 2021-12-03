@@ -17,12 +17,14 @@ struct Vertex {
                 distance_ = 0;
                 
         }
+
         Vertex(string name, int index) {
                 name_ = name;
                 index_ = index;
                 parent_ = -1;
                 distance_ = 0;
         }
+
         string name_;
         int index_;
         int parent_;
@@ -30,19 +32,23 @@ struct Vertex {
         vector<Vertex*> adjacent;
         string label;
 };
+
 struct Edge {
         Edge() {
                 u = Vertex();
                 v = Vertex();
         }
+
         Edge(Vertex u, Vertex v) {
                 this->u = u;
                 this->v = v;
         }
+
         Vertex u;
         Vertex v;
         string label;
 };
+
 struct Graph {
         //map<Edge, bool>** adjMatrix;
         bool** adjMatrix;
