@@ -58,7 +58,7 @@ TEST_CASE("shortest path parent", "[weight=1]") {
   BFS b(g);
   b.traverse(g, g->vertices[0]);
   string solution = b.shortestPath(g, "animal", "cat");
-  REQUIRE(solution == "animal cat");
+  REQUIRE(solution == " animals cat");
 }
 
 TEST_CASE("shortest path same branch", "[weight=1]") {
@@ -66,13 +66,13 @@ TEST_CASE("shortest path same branch", "[weight=1]") {
   BFS b(g);
   b.traverse(g, g->vertices[0]);
   string solution = b.shortestPath(g, "cow", "mac and cheese");
-  REQUIRE(solution == "cow food mac and cheese");
+  REQUIRE(solution == " cow food mac and cheese");
 }
 
 TEST_CASE("shortest path different branches", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   BFS b(g);
   b.traverse(g, g->vertices[2]);
-  string solution = b.shortestPath(g, "animal", "cat");
-  REQUIRE(solution == "animal cat cow food mac and cheese");
+  string solution = b.shortestPath(g, "cat", "mac and cheese");
+  REQUIRE(solution == " cat animals cow food mac and cheese");
 }

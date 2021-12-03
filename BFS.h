@@ -4,8 +4,6 @@
 #include <map>
 #include <queue>
 
-enum Label { UNEXPLORED, DISCOVERY, CROSS };
-
 class BFS {
     public:
         BFS(Graph * g);
