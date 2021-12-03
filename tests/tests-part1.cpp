@@ -1,6 +1,7 @@
 #include "../cs225/catch/catch.hpp"
 
 #include "../Graph.h"
+#include "../BFS.h"
 #include "../cs225/PNG.h"
 #include "../cs225/HSLAPixel.h"
 
@@ -51,3 +52,27 @@ TEST_CASE("contains edge is correct", "[weight=1]") {
   REQUIRE(answer == g->adjMatrix);
   delete answer;
 }*/
+
+TEST_CASE("shortest path parent", "[weight=1]") {
+  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+  BFS b(g);
+  b.traverse(g, g->vertices[0]);
+  string solution = b.shortestPath(g, "animal", "cat");
+  REQUIRE(solution == "animal cat");
+}
+
+TEST_CASE("shortest path same branch", "[weight=1]") {
+  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+  BFS b(g);
+  b.traverse(g, g->vertices[0]);
+  string solution = b.shortestPath(g, "cow", "mac and cheese");
+  REQUIRE(solution == "cow food mac and cheese");
+}
+
+TEST_CASE("shortest path different branches", "[weight=1]") {
+  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+  BFS b(g);
+  b.traverse(g, g->vertices[2]);
+  string solution = b.shortestPath(g, "animal", "cat");
+  REQUIRE(solution == "animal cat cow food mac and cheese");
+}
