@@ -18,6 +18,9 @@ BFS::BFS(Graph * g) {
         }
     }
 }
+//random idea, but I feel like currently we need the two traversal and shortest path functions because we are doing a more straighforward implementation
+//I think if we wanted to make it more efficient we could combine the two so that the traversal is from the first article name and that way shortest path
+//will be more built in, but that will take some more work
 
 void BFS::traverse(Graph * g, Vertex v) {
     queue<Vertex> q;
