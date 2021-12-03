@@ -32,9 +32,9 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 
 void addEdge(Graph* g, int src, int dest) {
     //add an edge between the given vertices, since this is an undirected graph, need to add it in both directions.
-    g->edges[src][dest]= Edge(g->vertices[src], g->vertices[dest]);
-    g->edges[dest][src]= Edge(g->vertices[src], g->vertices[dest]);
-    g->edgeList.push_back(Edge(g->vertices[src], g->vertices[dest]));
+    g->edges[src][dest]= Edge(*g->vertices[src], *g->vertices[dest]);
+    g->edges[dest][src]= Edge(*g->vertices[src], *g->vertices[dest]);
+    g->edgeList.push_back(Edge(*g->vertices[src], *g->vertices[dest]));
     g->adjMatrix[src][dest] = 1;
     g->adjMatrix[dest][src] = 1;
 }
@@ -90,7 +90,7 @@ Graph* createVertices(int numV) {
 
 Graph* constructGraph(const string& filename, const string& filename2) {
     // Construct graph
-    vector<Vertex> vertices;
+    vector<Vertex*> vertices;
     string line;
     int count = 0;
     //read in the file with all of the vertex names
@@ -103,7 +103,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             // push all of the vertices
             //make sure that input file vertices are sorted!!! (if they are not this will not work)
             //makes a vertex with the string that is the name of the article and index of item added to the vector
-            vertices.push_back(Vertex(line.substr(2), count));
+            vertices.push_back(new Vertex(line.substr(2), count));
             count++;
         }
     }

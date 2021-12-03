@@ -27,7 +27,7 @@ struct Vertex {
         int index_;
         int parent_;
         int distance_;
-        vector<Vertex> adjacent;
+        vector<Vertex*> adjacent;
         string label;
 };
 struct Edge {
@@ -49,7 +49,7 @@ struct Graph {
         //number of vertices in the graph
         int n;
         //vector of all vertices
-        vector<Vertex> vertices;
+        vector<Vertex*> vertices;
         //vector of all edges
         vector<Edge> edgeList;
         //vector of all edges indexed by the verticies that it is a part of
