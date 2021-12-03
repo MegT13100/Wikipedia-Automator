@@ -9,7 +9,7 @@ BFS::BFS(Graph * g) {
     for (Vertex * v : g->getVertices()) {
         v->label = "UNEXPLORED";
         for (Vertex * w : g->getVertices()) {
-            if(g->getAdjMatrix()[v->index_][w->index_]) {
+            if(g->adjMatrix[v->index_][w->index_]) {
                 v->adjacent.push_back(w);
             }
         }
@@ -51,6 +51,9 @@ void BFS::traverse(Graph * g, Vertex * v) {
 
 //this is probably gonna be a really inelegant implementation, but I think it will work, feel free to modifiy it 
 string BFS::shortestPath(Graph * g, string v1, string v2) {
+    if(v1 == v2) {
+        return " " + v1;
+    } 
     string toReturn;
     int first;
     int second;
@@ -73,8 +76,8 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
     while (a->parent_ != -1) {
         firstHalf.push_back(a->name_);
         a = g->getVertices()[a->parent_];
-        if (a->parent_ == second) {
-            firstHalf.push_back(b->name_);
+        if (a->index_ == second) {
+            firstHalf.push_back(a->name_);
             for(int i = 0; i < (int)firstHalf.size(); i++) {
                 toReturn = toReturn + " " + firstHalf[i];
             }
@@ -85,8 +88,8 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
     while (b->parent_ != -1) {
         secondHalf.push_back(b->name_);
         b = g->getVertices()[b->parent_];
-        if (b->parent_ == first) {
-            secondHalf.push_back(a->name_);
+        if (b->index_ == first) {
+            secondHalf.push_back(b->name_);
             for (int i = (int) secondHalf.size() - 1; i >= 0 ; i--) {
                 toReturn = toReturn + " " + secondHalf[i];
             }
@@ -96,6 +99,8 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
 
     cout << a->name_ <<endl;
     cout << b->name_ <<endl;
+    firstHalf.push_back(a->name_);
+    secondHalf.push_back(b->name_);
     for (int i = 0; i < (int)firstHalf.size(); i++) {
         toReturn = toReturn + " " + firstHalf[i];
     }

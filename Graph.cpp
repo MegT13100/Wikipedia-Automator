@@ -14,9 +14,13 @@ using std::vector;
 using std::ifstream;
 using namespace std;
 
-bool Graph::containsEdge(Graph const * const g, int src, int dest) {
+/*Graph::Graph(string name1, string name2) {
+    g = constructGraph(name1, name2);
+}*/
+
+bool containsEdge(Graph const * const g, int src, int dest) {
     // Check if an input is too large
-    if (src >= g->n || dest >= g->n) {
+    if (src >= g->getNumV() || dest >= g->getNumV()) {
         return false;
     }
 
@@ -33,14 +37,14 @@ bool Graph::containsEdge(Graph const * const g, int src, int dest) {
     return false;
 }
 
-void Graph::addEdge(Graph* g, int src, int dest) {
+void addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
     // NOTE: since this is an undirected graph, we need to add it in both directions
-    Edge* edge = new Edge(*g->vertices[src], *g->vertices[dest]);
-    g->edges[src][dest]= edge;
-    g->edges[dest][src]= edge;
+    Edge* edge = new Edge(*g->getVertices()[src], *g->getVertices()[dest]);
+    g->getEdges()[src][dest]= edge;
+    g->getEdges()[dest][src]= edge;
 
-    g->edgeList.push_back(edge);
+    g->getEdgeList().push_back(edge);
 
     // Mark as true on the matrix
     g->adjMatrix[src][dest] = 1;
@@ -68,10 +72,10 @@ int Graph::numIncomingEdges(Graph const * const g, int v) {
 }*/
 
 // Prints the adjacency matrix
-void Graph::printGraph(Graph const * const g) {
+void printGraph(Graph const * const g) {
     cout << "Adjacency Matrix: " << endl;
-    for (int i = 0; i < g->n; i += 1) {
-        for (int j = 0; j < g->n; j += 1) {
+    for (int i = 0; i < g->getNumV(); i += 1) {
+        for (int j = 0; j < g->getNumV(); j += 1) {
             bool neighbor = g->adjMatrix[i][j];
             cout << neighbor << " ";
         }
@@ -80,10 +84,10 @@ void Graph::printGraph(Graph const * const g) {
 }
 
 // Initializes the graph 
-Graph* Graph::createVertices(int numV) {
+Graph* createVertices(int numV) {
     //creates an empty graph with numV vertices and initializes all edges to false
     Graph* g = new Graph();
-    g->n = numV;
+    g->setNumV(numV);
     g->adjMatrix = new bool*[numV];
     for (int i = 0; i < numV; i += 1) {
         g->adjMatrix[i] = new bool[numV];
@@ -98,7 +102,7 @@ Graph* Graph::createVertices(int numV) {
     return g;
 }
 
-Graph* Graph::constructGraph(const string& filename, const string& filename2) {
+Graph* constructGraph(const string& filename, const string& filename2) {
     // Construct graph
     vector<Vertex*> vertices;
     string line;
@@ -123,9 +127,9 @@ Graph* Graph::constructGraph(const string& filename, const string& filename2) {
     infile.close();
     // initializes the graph with the vertices we read from the file
     Graph* g = createVertices(vertices.size());
-    g->vertices = vertices;
-    g->n = vertices.size();
-    g->edges = vector<vector<Edge*>>(g->n, vector<Edge*>(g->n, new Edge));
+    g->setVertices(vertices);
+    g->setNumV(vertices.size());
+    g->setEdges(vector<vector<Edge*>>(g->getNumV(), vector<Edge*>(g->getNumV(), new Edge)));
 
     // code for reading and opening a file
     ifstream infile2(filename2);
@@ -145,18 +149,28 @@ Graph* Graph::constructGraph(const string& filename, const string& filename2) {
     return g;
 }
 
-bool** Graph::getAdjMatrix() const {
+/*bool** Graph::getAdjMatrix() const {
     return adjMatrix;
-}
+}*/
 
 vector<Vertex*> Graph::getVertices() const {
     return vertices;
 }
-
+void Graph::setVertices(vector<Vertex*> verts) {
+    vertices = verts;
+}
 vector<Edge*> Graph::getEdgeList() const {
     return edgeList;
 }
-
 vector<vector<Edge*>> Graph::getEdges() const {
     return edges;
+}
+void Graph::setEdges(vector<vector<Edge*>> e) {
+    edges = e;
+}
+int Graph::getNumV() const {
+    return numV;
+}
+void Graph::setNumV(int n_) {
+    numV = n_;
 }

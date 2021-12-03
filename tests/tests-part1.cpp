@@ -12,7 +12,7 @@ TEST_CASE("Fake data vertices added correctly", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   vector<string> v = {"animals", "dog", "cat", "wolf", "cow", "food", "soup", "mac and cheese"};
   for(int n = 0; n < (int) v.size(); n++) {
-    REQUIRE(v[n] == g->vertices[n]->name_);
+    REQUIRE(v[n] == g->getVertices()[n]->name_);
   }
 }
 
@@ -56,15 +56,23 @@ TEST_CASE("contains edge is correct", "[weight=1]") {
 TEST_CASE("shortest path parent", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   BFS b(g);
-  b.traverse(g, g->vertices[0]);
-  string solution = b.shortestPath(g, "animal", "cat");
+  b.traverse(g, g->getVertices()[0]);
+  string solution = b.shortestPath(g, "cat", "cat");
   REQUIRE(solution == " animals cat");
+}
+
+TEST_CASE("shortest path same input", "[weight=1]") {
+  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+  BFS b(g);
+  b.traverse(g, g->getVertices()[0]);
+  string solution = b.shortestPath(g, "cat", "cat");
+  REQUIRE(solution == " cat");
 }
 
 TEST_CASE("shortest path same branch", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   BFS b(g);
-  b.traverse(g, g->vertices[0]);
+  //b.traverse(g, g->getVertices()[0]);
   string solution = b.shortestPath(g, "cow", "mac and cheese");
   REQUIRE(solution == " cow food mac and cheese");
 }
@@ -72,7 +80,7 @@ TEST_CASE("shortest path same branch", "[weight=1]") {
 TEST_CASE("shortest path different branches", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   BFS b(g);
-  b.traverse(g, g->vertices[2]);
+  b.traverse(g, g->getVertices()[2]);
   string solution = b.shortestPath(g, "cat", "mac and cheese");
   REQUIRE(solution == " cat animals cow food mac and cheese");
 }

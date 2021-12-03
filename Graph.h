@@ -14,8 +14,7 @@ struct Vertex {
                 name_ = "";
                 index_ = -1;
                 parent_ = -1;
-                distance_ = 0;
-                
+                distance_ = 0;    
         }
 
         Vertex(string name, int index) {
@@ -51,32 +50,24 @@ struct Edge {
 
 class Graph {
         public:
-                Graph();
-
-                Graph* createVertices(int numV);
-
-                Graph* constructGraph(const string& filename, const string& filename2);
-
-                void addEdge(Graph* g, int src, int dest);
-
-                bool containsEdge(Graph const * const g, int src, int dest);
-
-                /*int numOutgoingEdges(Graph const * const g, int v);
-
-                int numIncomingEdges(Graph const * const g, int v);*/
-
-                void printGraph(Graph const * const g);
-
-                bool** getAdjMatrix() const;
+                /*Graph();
+                Graph(string name1, string name2);*/
+                bool** adjMatrix;
+                //bool** getAdjMatrix() const;
+                //void setAdjMatrix(bool** am);
                 vector<Vertex*> getVertices() const;
+                void setVertices(vector<Vertex*> vs);
                 vector<Edge*> getEdgeList() const;
                 vector<vector<Edge*>> getEdges() const;
+                void setEdges(vector<vector<Edge*>> edgs);
+                int getNumV() const;
+                void setNumV(int n_);
         
         private:
+                //Graph * g;
                 //map<Edge, bool>** adjMatrix;
-                bool** adjMatrix;
                 //number of vertices in the graph
-                int n;
+                int numV;
                 //vector of all vertices
                 vector<Vertex*> vertices;
                 //vector of all edges
@@ -86,3 +77,17 @@ class Graph {
                 //map that contains all the adjacent edges for a given vertex
                 //std::unordered_map<int, vector<Vertex>> adjacent;
 };
+
+        Graph* createVertices(int numV);
+
+        Graph* constructGraph(const string& filename, const string& filename2);
+
+        void addEdge(Graph* g, int src, int dest);
+
+        bool containsEdge(Graph const * const g, int src, int dest);
+
+        /*int numOutgoingEdges(Graph const * const g, int v);
+
+        int numIncomingEdges(Graph const * const g, int v);*/
+
+        void printGraph(Graph const * const g);
