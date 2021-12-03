@@ -71,7 +71,6 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
         a = g->vertices[a->parent_];
         if(a->parent_ == second) {
             firstHalf.push_back(b->name_);
-            firstHalf.push_back(g->vertices[b->parent_]->name_);
             for(int i = 0; i < (int)firstHalf.size(); i++) {
                 toReturn = toReturn + " " + firstHalf[i];
             }
@@ -83,16 +82,14 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
         b = g->vertices[b->parent_];
         if(b->parent_ == first) {
             secondHalf.push_back(a->name_);
-            secondHalf.push_back(g->vertices[a->parent_]->name_);
             for(int i = (int) secondHalf.size() - 1; i >= 0 ; i--) {
                 toReturn = toReturn + " " + secondHalf[i];
             }
             return toReturn;
         }
     }
-    firstHalf.push_back(a->name_);
-    secondHalf.push_back(b->name_);
-
+    cout << a->name_ <<endl;
+    cout << b->name_ <<endl;
     for(int i = 0; i < (int)firstHalf.size(); i++) {
         toReturn = toReturn + " " + firstHalf[i];
     }
