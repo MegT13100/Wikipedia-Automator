@@ -14,7 +14,7 @@ using std::vector;
 using std::ifstream;
 using namespace std;
 
-bool containsEdge(Graph const * const g, int src, int dest) {
+bool Graph::containsEdge(Graph const * const g, int src, int dest) {
     // Check if an input is too large
     if (src >= g->n || dest >= g->n) {
         return false;
@@ -33,7 +33,7 @@ bool containsEdge(Graph const * const g, int src, int dest) {
     return false;
 }
 
-void addEdge(Graph* g, int src, int dest) {
+void Graph::addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
     // NOTE: since this is an undirected graph, we need to add it in both directions
     g->edges[src][dest]= Edge(*g->vertices[src], *g->vertices[dest]);
@@ -46,7 +46,7 @@ void addEdge(Graph* g, int src, int dest) {
     g->adjMatrix[dest][src] = 1;
 }
 
-/*int numOutgoingEdges(Graph const * const g, int v) {
+/*int Graph::numOutgoingEdges(Graph const * const g, int v) {
     int count = 0;
     for(int i = 0; i < g->n; i++) {
         if( g->adjMatrix[v][i] == 1) {
@@ -56,7 +56,7 @@ void addEdge(Graph* g, int src, int dest) {
     return count;
 }
 
-int numIncomingEdges(Graph const * const g, int v) {
+int Graph::numIncomingEdges(Graph const * const g, int v) {
     int count = 0;
     for(int i = 0; i < g->n; i++) {
         if( g->adjMatrix[i][v] == 1) {
@@ -67,7 +67,7 @@ int numIncomingEdges(Graph const * const g, int v) {
 }*/
 
 // Prints the adjacency matrix
-void printGraph(Graph const * const g) {
+void Graph::printGraph(Graph const * const g) {
     cout << "Adjacency Matrix: " << endl;
     for (int i = 0; i < g->n; i += 1) {
         for (int j = 0; j < g->n; j += 1) {
@@ -79,7 +79,7 @@ void printGraph(Graph const * const g) {
 }
 
 // Initializes the graph 
-Graph* createVertices(int numV) {
+Graph* Graph::createVertices(int numV) {
     //creates an empty graph with numV vertices and initializes all edges to false
     Graph* g = new Graph();
     g->n = numV;
@@ -97,7 +97,7 @@ Graph* createVertices(int numV) {
     return g;
 }
 
-Graph* constructGraph(const string& filename, const string& filename2) {
+Graph* Graph::constructGraph(const string& filename, const string& filename2) {
     // Construct graph
     vector<Vertex*> vertices;
     string line;
@@ -144,10 +144,10 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     return g;
 }
 
-// vector<Vertex> getVertices()  {
-//     return vertices;
-// }
+vector<Vertex*> Graph::getVertices() const {
+    return vertices;
+}
 
-// vector<Edge> getEdges()  {
-//     return edgeList;
-// }
+vector<Edge> Graph::getEdges() const {
+    return edgeList;
+}

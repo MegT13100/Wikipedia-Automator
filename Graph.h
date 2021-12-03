@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -5,8 +7,6 @@
 #include <map>
 #include <unordered_map>
 
-#ifndef _GRAPH_
-#define _GRAPH_
 using namespace std;
 
 struct Vertex {
@@ -49,38 +49,39 @@ struct Edge {
         string label;
 };
 
-struct Graph {
-        //map<Edge, bool>** adjMatrix;
-        bool** adjMatrix;
-        //number of vertices in the graph
-        int n;
-        //vector of all vertices
-        vector<Vertex*> vertices;
-        //vector of all edges
-        vector<Edge> edgeList;
-        //vector of all edges indexed by the verticies that it is a part of
-        vector<vector<Edge>> edges;
-        //map that contains all the adjacent edges for a given vertex
-        //std::unordered_map<int, vector<Vertex>> adjacent;
+class Graph {
+        public:
+                Graph();
+
+                bool containsEdge(Graph const * const g, int src, int dest);
+
+                void addEdge(Graph* g, int src, int dest);
+
+                /*int numOutgoingEdges(Graph const * const g, int v);
+
+                int numIncomingEdges(Graph const * const g, int v);*/
+
+                void printGraph(Graph const * const g);
+
+                Graph* createVertices(int numV);
+
+                Graph* constructGraph(const string& filename, const string& filename2);
+
+                vector<Vertex*> getVertices() const;
+
+                vector<Edge> getEdges() const;
+        
+        private:
+                //map<Edge, bool>** adjMatrix;
+                bool** adjMatrix;
+                //number of vertices in the graph
+                int n;
+                //vector of all vertices
+                vector<Vertex*> vertices;
+                //vector of all edges
+                vector<Edge> edgeList;
+                //vector of all edges indexed by the verticies that it is a part of
+                vector<vector<Edge>> edges;
+                //map that contains all the adjacent edges for a given vertex
+                //std::unordered_map<int, vector<Vertex>> adjacent;
 };
-
-bool containsEdge(Graph const * const g, int src, int dest);
-
-void addEdge(Graph* g, int src, int dest);
-
-/*int numOutgoingEdges(Graph const * const g, int v);
-
-int numIncomingEdges(Graph const * const g, int v);*/
-
-void printGraph(Graph const * const g);
-
-Graph* createVertices(int numV);
-
-Graph* constructGraph(const string& filename, const string& filename2);
-
-vector<Vertex> getVertices();
-
-vector<Edge> getEdges();
-
-#endif
-
