@@ -57,7 +57,7 @@ TEST_CASE("shortest path parent", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   BFS b(g);
   b.traverse(g, g->getVertices()[0]);
-  string solution = b.shortestPath(g, "cat", "cat");
+  string solution = b.shortestPath(g, "animals", "cat");
   REQUIRE(solution == " animals cat");
 }
 
