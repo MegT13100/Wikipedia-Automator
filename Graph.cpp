@@ -32,6 +32,8 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 
 void addEdge(Graph* g, int src, int dest) {
     //add an edge between the given vertices, since this is an undirected graph, need to add it in both directions.
+    g->edges[src][dest]= Edge(g->vertices[src], g->vertices[dest]);
+    g->edges[dest][src]= Edge(g->vertices[src], g->vertices[dest]);
     g->adjMatrix[src][dest] = 1;
     g->adjMatrix[dest][src] = 1;
 }
@@ -110,6 +112,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     Graph* g = createVertices(vertices.size());
     g->vertices = vertices;
     g->n = vertices.size();
+    g->edges = std::vector<std::vector<Edge>>(g->n, std::vector<Edge>(g->n, Edge()));
 
     //code for reading and opening a file
     ifstream infile2(filename2);

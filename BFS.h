@@ -4,14 +4,14 @@
 #include <map>
 #include <queue>
 
-enum Label { UNEXPLORED, DISCOVERY, CROSS }
+enum Label { UNEXPLORED, DISCOVERY, CROSS };
 
 class BFS {
     public:
-        BFS(Graph g);
-        traverse(Graph g, Vertex v);
+        BFS(Graph * g);
+        void traverse(Graph * g, Vertex v);
     private:
-        Graph graph_;
+        //Graph * graph_;
         map<Vertex, bool> visited_;
-        queue q;
+        //queue<Vertex> q;
 };

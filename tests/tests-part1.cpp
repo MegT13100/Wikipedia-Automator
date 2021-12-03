@@ -15,7 +15,15 @@ TEST_CASE("Fake data vertices added correctly", "[weight=1]") {
   }
 }
 
-TEST_CASE("Fake data edges added correctly", "[weight=1]") {
+/*TEST_CASE("Fake data edges added correctly", "[weight=1]") {
+  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+  vector<string> v = {"animals", "dog", "cat", "wolf", "cow", "food", "soup", "mac and cheese"};
+  for(int n = 0; n < (int) v.size(); n++) {
+    REQUIRE(e[n] == g->edges[n]);
+  }
+}*/
+
+TEST_CASE("contains edge is correct", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   REQUIRE( containsEdge(g, 0, 1) == true);
   REQUIRE( containsEdge(g, 6, 5) == true);
