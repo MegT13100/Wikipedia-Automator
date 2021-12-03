@@ -42,6 +42,39 @@ void BFS::traverse(Graph * g, Vertex v) {
     }
 }
 
+//this is probably gonna be a really inelegant implementation, but I think it will work, feel free to modifiy it 
 vector<string> BFS::shortestPath(Graph * g, string v1, string v2) {
-    return vector<string>();
+    int first;
+    int second;
+    Vertex a;
+    Vertex b;
+    vector<string> firstHalf;
+    vector<string> secondHalf;
+    for(Vertex v : g->vertices) {
+        if(v.name_ == v1) {
+            Vertex a = v;
+            first = v.index_;
+        }
+        if(v.name_ == v2) {
+            Vertex b = v;
+            second = v.index_;
+        }
+    }
+    while(a.parent_ != -1) {
+        firstHalf.push_back(a.name_);
+        a = g->vertices[a.parent_];
+        if(a.parent_ == second) {
+            firstHalf.push_back(b.name_);
+            return firstHalf;
+        }
+    }
+    while(b.parent_ != -1) {
+        secondHalf.push_back(b.name_);
+        b = g->vertices[b.parent_];
+        if(b.parent_ == first) {
+            secondHalf.push_back(a.name_);
+            return secondHalf;
+        }
+    }
+    return firstHalf;
 }
