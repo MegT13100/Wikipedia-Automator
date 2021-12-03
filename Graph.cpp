@@ -36,10 +36,11 @@ bool Graph::containsEdge(Graph const * const g, int src, int dest) {
 void Graph::addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
     // NOTE: since this is an undirected graph, we need to add it in both directions
-    g->edges[src][dest]= Edge(*g->vertices[src], *g->vertices[dest]);
-    g->edges[dest][src]= Edge(*g->vertices[src], *g->vertices[dest]);
+    Edge* edge = new Edge(*g->vertices[src], *g->vertices[dest]);
+    g->edges[src][dest]= edge;
+    g->edges[dest][src]= edge;
 
-    g->edgeList.push_back(Edge(*g->vertices[src], *g->vertices[dest]));
+    g->edgeList.push_back(edge);
 
     // Mark as true on the matrix
     g->adjMatrix[src][dest] = 1;
@@ -124,7 +125,7 @@ Graph* Graph::constructGraph(const string& filename, const string& filename2) {
     Graph* g = createVertices(vertices.size());
     g->vertices = vertices;
     g->n = vertices.size();
-    g->edges = std::vector<std::vector<Edge>>(g->n, std::vector<Edge>(g->n, Edge()));
+    g->edges = vector<vector<Edge*>>(g->n, vector<Edge*>(g->n, new Edge));
 
     // code for reading and opening a file
     ifstream infile2(filename2);
@@ -144,10 +145,18 @@ Graph* Graph::constructGraph(const string& filename, const string& filename2) {
     return g;
 }
 
+bool** Graph::getAdjMatrix() const {
+    return adjMatrix;
+}
+
 vector<Vertex*> Graph::getVertices() const {
     return vertices;
 }
 
-vector<Edge> Graph::getEdges() const {
+vector<Edge*> Graph::getEdgeList() const {
     return edgeList;
+}
+
+vector<vector<Edge*>> Graph::getEdges() const {
+    return edges;
 }

@@ -53,9 +53,13 @@ class Graph {
         public:
                 Graph();
 
-                bool containsEdge(Graph const * const g, int src, int dest);
+                Graph* createVertices(int numV);
+
+                Graph* constructGraph(const string& filename, const string& filename2);
 
                 void addEdge(Graph* g, int src, int dest);
+
+                bool containsEdge(Graph const * const g, int src, int dest);
 
                 /*int numOutgoingEdges(Graph const * const g, int v);
 
@@ -63,13 +67,10 @@ class Graph {
 
                 void printGraph(Graph const * const g);
 
-                Graph* createVertices(int numV);
-
-                Graph* constructGraph(const string& filename, const string& filename2);
-
+                bool** getAdjMatrix() const;
                 vector<Vertex*> getVertices() const;
-
-                vector<Edge> getEdges() const;
+                vector<Edge*> getEdgeList() const;
+                vector<vector<Edge*>> getEdges() const;
         
         private:
                 //map<Edge, bool>** adjMatrix;
@@ -79,9 +80,9 @@ class Graph {
                 //vector of all vertices
                 vector<Vertex*> vertices;
                 //vector of all edges
-                vector<Edge> edgeList;
+                vector<Edge*> edgeList;
                 //vector of all edges indexed by the verticies that it is a part of
-                vector<vector<Edge>> edges;
+                vector<vector<Edge*>> edges;
                 //map that contains all the adjacent edges for a given vertex
                 //std::unordered_map<int, vector<Vertex>> adjacent;
 };
