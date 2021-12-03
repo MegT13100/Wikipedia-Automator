@@ -11,7 +11,7 @@ TEST_CASE("Fake data vertices added correctly", "[weight=1]") {
   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
   vector<string> v = {"animals", "dog", "cat", "wolf", "cow", "food", "soup", "mac and cheese"};
   for(int n = 0; n < (int) v.size(); n++) {
-    REQUIRE(v[n] == g->vertices[n].name_);
+    REQUIRE(v[n] == g->vertices[n]->name_);
   }
 }
 

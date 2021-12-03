@@ -15,10 +15,6 @@ int main() {
    printGraph(g);
    BFS b(g);
    b.traverse(g, g->vertices[2]);
-   vector<string> solution = b.shortestPath(g, "cat", "mac and cheese");
-
-   for(int i = 0; i < (int) solution.size(); i++) {
-      cout << solution[i] << " ";
-   }
-   cout << endl;
+   string solution = b.shortestPath(g, "cat", "mac and cheese");
+   cout << solution << endl;
 }

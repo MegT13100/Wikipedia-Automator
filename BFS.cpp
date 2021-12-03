@@ -48,7 +48,8 @@ void BFS::traverse(Graph * g, Vertex * v) {
 }
 
 //this is probably gonna be a really inelegant implementation, but I think it will work, feel free to modifiy it 
-vector<string> BFS::shortestPath(Graph * g, string v1, string v2) {
+string BFS::shortestPath(Graph * g, string v1, string v2) {
+    string toReturn;
     int first;
     int second;
     Vertex * a;
@@ -70,7 +71,11 @@ vector<string> BFS::shortestPath(Graph * g, string v1, string v2) {
         a = g->vertices[a->parent_];
         if(a->parent_ == second) {
             firstHalf.push_back(b->name_);
-            return firstHalf;
+            firstHalf.push_back(g->vertices[b->parent_]->name_);
+            for(int i = 0; i < (int)firstHalf.size(); i++) {
+                toReturn = toReturn + " " + firstHalf[i];
+            }
+            return toReturn;
         }
     }
     while(b->parent_ != -1) {
@@ -78,8 +83,21 @@ vector<string> BFS::shortestPath(Graph * g, string v1, string v2) {
         b = g->vertices[b->parent_];
         if(b->parent_ == first) {
             secondHalf.push_back(a->name_);
-            return secondHalf;
+            secondHalf.push_back(g->vertices[a->parent_]->name_);
+            for(int i = (int) secondHalf.size() - 1; i >= 0 ; i--) {
+                toReturn = toReturn + " " + secondHalf[i];
+            }
+            return toReturn;
         }
     }
-    return firstHalf;
+    firstHalf.push_back(a->name_);
+    secondHalf.push_back(b->name_);
+
+    for(int i = 0; i < (int)firstHalf.size(); i++) {
+        toReturn = toReturn + " " + firstHalf[i];
+    }
+    for(int i = (int) secondHalf.size() - 1; i >= 0 ; i--) {
+        toReturn = toReturn + " " + secondHalf[i];
+    }
+    return toReturn;
 }
