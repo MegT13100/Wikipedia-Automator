@@ -96,9 +96,6 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
             return toReturn;
         }
     }
-
-    cout << a->name_ <<endl;
-    cout << b->name_ <<endl;
     firstHalf.push_back(a->name_);
     secondHalf.push_back(b->name_);
     for (int i = 0; i < (int)firstHalf.size(); i++) {
