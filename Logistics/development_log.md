@@ -1,8 +1,10 @@
 # CS 225 Data Structures
 ## Development Log (matatov-suminc2-mrtobin2-emilyc7)
 
-### Week 11/22
+### Week 11/15
 * Submitted proposal for final approval.
+
+### Week 11/22
 * Researched implementations for data processing
 * Researched BFS traversal and shortest path for our graph type
 * Familiarized ourselves with our respective algorithms (PageRank or Force Directed Graph)
