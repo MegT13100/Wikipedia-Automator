@@ -12,7 +12,8 @@ class drawGraph {
         // draws the circls for the points
         void drawCircle(cs225::PNG* points);
         // outputs the final graph image
-        PNG* drawGraph(Graph g);
+        cs225::PNG drawGraph(map<string, pair<int, int>>, Graph g, double threshold, int maxIter);
+        Graph initialLayout();
         //calculates the slope between two points
         double calculateEdge()
     private:

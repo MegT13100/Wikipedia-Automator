@@ -41,7 +41,7 @@ for i in # of iterations:
 */
 
 
-cs225::PNG* drawGraph::drawGraph(Graph g) {
+Graph drawGraph::initialLayout(Graph g) {
     // set up a blank PNG as output
     cs225::PNG* output = new cs225::PNG(numV * 5, numV * 5);
     //make a vertex list 
