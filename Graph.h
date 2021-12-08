@@ -28,7 +28,6 @@ struct Vertex {
         int index_;
         int parent_;
         int distance_;
-        pair 
         vector<Vertex*> adjacent;
         string label;
 };

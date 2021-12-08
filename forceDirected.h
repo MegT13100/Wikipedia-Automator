@@ -7,17 +7,19 @@
 
 using namespace std;
 
-class drawGraph {
+class GraphVisualization {
     public:
-        // draws the circls for the points
-        void drawCircle(cs225::PNG* points);
+        
         // outputs the final graph image
-        cs225::PNG drawGraph(map<string, pair<int, int>>, Graph g, double threshold, int maxIter);
-        Graph initialLayout();
-        //calculates the slope between two points
-        double calculateEdge()
+        cs225::PNG drawForceDirectedGraph(map<string, pair<int, int>>, Graph g, double threshold, int maxIter);
+        // sets up a random layout of the graph
+        map<string, pair<int, int>> initialLayout(Graph g);
+        // randomly picks a valid point within the space
+        pair<int, int> pickPoint(cs225::PNG* output);
+        
+        cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
     private:
         map<string, pair<int, int>> positions;
 
          
-}
+};
