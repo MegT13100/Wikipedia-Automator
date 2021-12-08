@@ -1,5 +1,5 @@
 EXENAME = graph
-OBJS = main.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o
+OBJS = main.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o forceDirected.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -37,6 +37,9 @@ main.o : main.cpp Graph.h BFS.h cs225/PNG.h cs225/HSLAPixel.h
 
 Graph.o : Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) Graph.cpp
+
+forceDirected.o : forceDirected.cpp forceDirected.h
+	$(CXX) $(CXXFLAGS) forceDirected.cpp
 
 BFS.o : BFS.cpp BFS.h
 	$(CXX) $(CXXFLAGS) BFS.cpp
