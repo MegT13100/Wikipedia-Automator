@@ -14,7 +14,8 @@ struct Vertex {
                 name_ = "";
                 index_ = -1;
                 parent_ = -1;
-                distance_ = 0;    
+                distance_ = 0;
+                degree_ = 0;    
         }
 
         Vertex(string name, int index) {
@@ -22,6 +23,7 @@ struct Vertex {
                 index_ = index;
                 parent_ = -1;
                 distance_ = 0;
+                degree_ = 0;
         }
 
         string name_;
@@ -30,6 +32,7 @@ struct Vertex {
         int distance_;
         vector<Vertex*> adjacent;
         string label;
+        int degree_;
 };
 
 struct Edge {
