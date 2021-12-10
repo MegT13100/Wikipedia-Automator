@@ -47,12 +47,12 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
     int x = rand() % output->width() - 10;
     int y = rand() % output->height() - 10;
 
-    // how to iterate through a map? 
-    for (string name : positions) {
-        if (positions[name].first == x && positions[name].second == y) {
+    // iterate through the map 
+    for (auto const& [key, val] : positions) {
+        if (val.first == x && val.second == y) {
             return pickPoint(output);
         } else {
-            int dist = sqrt(pow(positions[name].first - x, 2) + pow(positions[name].second - y, 2));
+            int dist = sqrt(pow(val.first - x, 2) + pow(val.second - y, 2));
             if (dist < 15) {
                 return pickPoint(output);
             }
@@ -72,7 +72,6 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
 
 
 
-
 cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
                                                              int maxIter, int length, float cooling, cs225::PNG* output) {
     unsigned int i = 1;
@@ -80,21 +79,65 @@ cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int,
     int area = output->width() * output->height();
     float k = sqrt(area / vertices.size());
 
+    float sumXa = 0;
+    float sumYa = 0; 
+    float sumXr = 0;
+    float sumYr = 0;
+
+    map<string, pair<float, float>> forces;
+
     while (i < maxIter && cooling > 0) {
         for (Vertex* u : vertices) {
             // double force on v = "sum of all repulsive forces" + "sum of attractive forces from adjacent vertices"
-            // calculate  forces 
-            for (Vertex* v : vertices) {
-                double dist = sqrt(pow(layout[u->name_].first - layout[v->name_].first, 2) 
-                                + pow(layout[u->name_].second - layout[v->name_].second, 2));
-                float fRep = (-1 * pow(k,2)) / dist;
-                float fAtr = pow(dist, 2) / dist;
-                
+
+            // calculate attractive forces for all adjacent vertices 
+            vector<Vertex*> adjacent = u->adjacent;
+           
+            for (Vertex* e : adjacent) {
+                float dist = sqrt(pow(layout[u->name_].first - layout[e->name_].first, 2) 
+                                + pow(layout[u->name_].second - layout[e->name_].second, 2));
+                // calculate unit vector
+                float x = layout[e->name_].first - layout[u->name_].first;
+                float y = layout[e->name_].second - layout[u->name_].second;
+                float magnitude = sqrt(pow(x,2) + pow(y,2));
+                x = x / magnitude;
+                y = y / magnitude;
+                // calculate attractive force vector for this vertice and then add it to the total.
+                float c = pow(dist, 2)/ length;
+                sumXa = sumXa + (x * c);
+                sumYa = sumYa + (y * c);
+
             }
 
+            // calculate all repulsive forces
+            for (Vertex* v : vertices) {
+                if (v->name_ == u ->name_) {
+                    continue;
+                }
+                float dist = sqrt(pow(layout[u->name_].first - layout[v->name_].first, 2) 
+                                + pow(layout[u->name_].second - layout[v->name_].second, 2));
+                 // calculate unit vector
+                float x = layout[u->name_].first - layout[v->name_].first;
+                float y = layout[u->name_].second - layout[v->name_].second;
+                float magnitude = sqrt(pow(x,2) + pow(y,2));
+                x = x / magnitude;
+                y = y / magnitude;
 
+                float c = pow(length, 2) / dist;
+                sumXr = sumXr + (x * c);
+                sumYr = sumYr + (y * c);   
+            }
+            
+            float forceX = sumXr + sumXa;
+            float forceY = sumYr + sumYa;
+
+            forces.insert({u->name_, make_pair(forceX, forceY)});
         }
+         
+        
+
         for (Vertex* v : vertices) {
+            
             // take position, apply force, which will move the position 
             // pair position = posiiton + (force * cooling factor) cooling factor goes from 1 - 0 exponentially
             // or cooling can be always 1 (though we want it to be like 0.99)
