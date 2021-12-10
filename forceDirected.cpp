@@ -72,7 +72,7 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
 
 
 
-cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
+map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
                                                              int maxIter, int length, float cooling, cs225::PNG* output) {
     unsigned int i = 1;
     vector<Vertex*> vertices = g->getVertices();
@@ -85,6 +85,7 @@ cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int,
     float sumYr = 0;
 
     map<string, pair<float, float>> forces;
+    map<string, pair<int, int>> forceLayout;
 
     while (i < maxIter && cooling > 0) {
         for (Vertex* u : vertices) {
@@ -117,7 +118,7 @@ cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int,
                 float dist = sqrt(pow(layout[u->name_].first - layout[v->name_].first, 2) 
                                 + pow(layout[u->name_].second - layout[v->name_].second, 2));
                  // calculate unit vector
-                float x = layout[u->name_].first - layout[v->name_].first;
+                float x = layout[u->name_].first - layout[v->name_].first; // x + v = u 
                 float y = layout[u->name_].second - layout[v->name_].second;
                 float magnitude = sqrt(pow(x,2) + pow(y,2));
                 x = x / magnitude;
@@ -134,16 +135,18 @@ cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int,
             forces.insert({u->name_, make_pair(forceX, forceY)});
         }
          
+        // 
         
-
-        for (Vertex* v : vertices) {
-            
-            // take position, apply force, which will move the position 
-            // pair position = posiiton + (force * cooling factor) cooling factor goes from 1 - 0 exponentially
-            // or cooling can be always 1 (though we want it to be like 0.99)
+        for (auto const& [key, val] : forces) {
+            cooling = pow(cooling, i);
+            int x = layout[key].first + (val.first * cooling);
+            int y = layout[key].second + (val.second * cooling);
+            forceLayout.insert({key, make_pair(x,y)});
         }
+
         i++;
     }
+    return forceLayout;
 }
 
 // repulsive forces: 

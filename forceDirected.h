@@ -11,7 +11,7 @@ class GraphVisualization {
     public:
         
         // outputs the final graph image
-        cs225::PNG constructForceDirectedGraph(map<string, pair<int, int>>, Graph* g,
+        map<string, pair<int, int>> constructForceDirectedGraph(map<string, pair<int, int>>, Graph* g,
                                                 int maxIter, int length, float cooling, cs225::PNG* output);
         // sets up a random layout of the graph
         map<string, pair<int,int>> initialLayout(Graph* g);
