@@ -39,12 +39,15 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 
 void addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
-    // NOTE: since this is an undirected graph, we need to add it in both directions
+    // NOTE: since this is an directed graph, we only need to add in to the source
     Edge* edge = new Edge(*g->getVertices()[src], *g->getVertices()[dest]);
     g->getEdges()[src][dest]= edge;
-    g->getEdges()[dest][src]= edge;
+    // g->getEdges()[dest][src]= edge;
 
     g->getEdgeList().push_back(edge);
+
+    // Increment the degree of the vertex
+    g->getVertices()[src]->degree_++;
 
     // Mark as true on the matrix
     g->adjMatrix[src][dest] = 1;
