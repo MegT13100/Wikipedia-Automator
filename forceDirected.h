@@ -11,7 +11,8 @@ class GraphVisualization {
     public:
         
         // outputs the final graph image
-        cs225::PNG constructForceDirectedGraph(map<string, pair<int, int>>, Graph* g, double threshold, int maxIter);
+        cs225::PNG constructForceDirectedGraph(map<string, pair<int, int>>, Graph* g,
+                                                int maxIter, int length, float cooling, cs225::PNG* output);
         // sets up a random layout of the graph
         map<string, pair<int,int>> initialLayout(Graph* g);
         
@@ -20,6 +21,7 @@ class GraphVisualization {
         // randomly picks a valid point within the space
         pair<int,int> pickPoint(cs225::PNG* output);
         map<string, pair<int,int>> positions;
+        
 
          
 };

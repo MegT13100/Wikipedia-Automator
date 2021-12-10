@@ -73,12 +73,26 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
 
 
 
-cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>>, Graph* g, double threshold, int maxIter) {
+cs225::PNG GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
+                                                             int maxIter, int length, float cooling, cs225::PNG* output) {
     unsigned int i = 1;
     vector<Vertex*> vertices = g->getVertices();
-    while (i < maxIter && "forces" > threshold) {
-        for (Vertex* v : vertices) {
+    int area = output->width() * output->height();
+    float k = sqrt(area / vertices.size());
+
+    while (i < maxIter && cooling > 0) {
+        for (Vertex* u : vertices) {
             // double force on v = "sum of all repulsive forces" + "sum of attractive forces from adjacent vertices"
+            // calculate  forces 
+            for (Vertex* v : vertices) {
+                double dist = sqrt(pow(layout[u->name_].first - layout[v->name_].first, 2) 
+                                + pow(layout[u->name_].second - layout[v->name_].second, 2));
+                float fRep = (-1 * pow(k,2)) / dist;
+                float fAtr = pow(dist, 2) / dist;
+                
+            }
+
+
         }
         for (Vertex* v : vertices) {
             // take position, apply force, which will move the position 
