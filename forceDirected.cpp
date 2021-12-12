@@ -47,7 +47,7 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
     int x = rand() % output->width() - 10;
     int y = rand() % output->height() - 10;
 
-    // iterate through the map 
+    // iterate through the map (this syntax may be messed up)
     for (auto const& [key, val] : positions) {
         if (val.first == x && val.second == y) {
             return pickPoint(output);
@@ -67,17 +67,15 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
 
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-   
+   return new cs225::PNG();
 }
 
 
 
 map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
-                                                             int maxIter, int length, float cooling, cs225::PNG* output) {
-    unsigned int i = 1;
+                                                             int maxIter, int length, float cooling) {
+    int i = 1;
     vector<Vertex*> vertices = g->getVertices();
-    int area = output->width() * output->height();
-    float k = sqrt(area / vertices.size());
 
     float sumXa = 0;
     float sumYa = 0; 
@@ -148,21 +146,3 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
     }
     return forceLayout;
 }
-
-// repulsive forces: 
-/*
-crep (repulsion constant) = 2.0 "in fruct-rein this is L^2" / (euclidean distance between u & v)  * direction from v to u (unit vector)
-*/
-// attractive forces:
-/*
-cspring (spring constnant) = 1.0 * log 10 (abs(dist between u & v) / L or the ideal length of spring edges) * unit vector from u to v
-f attract = spring force - repulsive force
-
-f attract = dist^2 / L  * unit vec from u to v for FR you need a larger length if you have a smaller cooling factor and vice versa
-*/
-
-// ⟨→BA⟩=(2,3)−(−3,2)=⟨5,1⟩
-// A = (2,3) and B = (-3,2)
-// subtract start from the terminal point so 
-// 2 --3 = 5 and 3 - 2 = 1 
-// so v1 
