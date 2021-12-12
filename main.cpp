@@ -16,10 +16,10 @@ int main() {
    //pre-filter
    //change to adjList
    //Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt");
-   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+   //Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
    //printGraph(g);
-   BFS b(g);
+   //BFS b(g);
    //b.traverse(g, g->getVertices()[2]);
-   string solution = b.shortestPath(g, "cat", "mac and cheese");
+   string solution = b.shortestPath(g, "Arkansas Highway 99", "Lower Parker School");
    cout << solution << endl;
 }

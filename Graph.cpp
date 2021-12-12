@@ -40,6 +40,9 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 void addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
     // NOTE: since this is a directed graph, we only need to add in to the source
+    if(src >= g->getNumV() || src >= g->getNumV()) {
+        return;
+    }
     Edge* edge = new Edge(*g->getVertices()[src], *g->getVertices()[dest]);
     g->getEdges()[src][dest]= edge;
     // g->getEdges()[dest][src]= edge;
@@ -124,12 +127,19 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             // push all of the vertices
             // make sure that input file vertices are sorted!!! (if they are not this will not work)
             // makes a vertex with the string that is the name of the article and index of item added to the vector
-            cout << line.substr(2) << endl;
-            vertices.push_back(new Vertex(line.substr(2), count));
-            count++;
-            if(count > 10000) {
+            std::istringstream is(line);
+            std::string name;
+            std::string word;
+            int index; 
+            is >> index;
+            if(index > 1000) {
                 break;
             }
+            while (is >> word) {
+                name = name + " " + word;
+            }
+            vertices.push_back(new Vertex(name.substr(1), index));
+            count++;
         }
     }
 
@@ -151,10 +161,10 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             std::istringstream is(line);
             int src, dest; is >> src >> dest;
             // adds edge to adjacency matrix
-            addEdge(g, src, dest);
-            if(src > 10000 || dest > 10000) {
-                break;
+            if(src > 1000 || dest > 1000) {
+                continue;
             }
+            addEdge(g, src, dest);
         }
     }
     // closes the file
