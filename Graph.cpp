@@ -39,7 +39,7 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 
 void addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
-    // NOTE: since this is an directed graph, we only need to add in to the source
+    // NOTE: since this is a directed graph, we only need to add in to the source
     Edge* edge = new Edge(*g->getVertices()[src], *g->getVertices()[dest]);
     g->getEdges()[src][dest]= edge;
     // g->getEdges()[dest][src]= edge;
@@ -49,9 +49,12 @@ void addEdge(Graph* g, int src, int dest) {
     // Increment the degree of the vertex
     g->getVertices()[src]->degree_++;
 
+    //add edge to adjecency list
+    g->getVertices()[src]->adjacent.push_back(g->getVertices()[dest]);
+
     // Mark as true on the matrix
     g->adjMatrix[src][dest] = 1;
-    g->adjMatrix[dest][src] = 1;
+    //g->adjMatrix[dest][src] = 1;
 }
 
 /*int Graph::numOutgoingEdges(Graph const * const g, int v) {
@@ -121,8 +124,12 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             // push all of the vertices
             // make sure that input file vertices are sorted!!! (if they are not this will not work)
             // makes a vertex with the string that is the name of the article and index of item added to the vector
+            cout << line.substr(2) << endl;
             vertices.push_back(new Vertex(line.substr(2), count));
             count++;
+            if(count > 10000) {
+                break;
+            }
         }
     }
 
@@ -145,6 +152,9 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             int src, dest; is >> src >> dest;
             // adds edge to adjacency matrix
             addEdge(g, src, dest);
+            if(src > 10000 || dest > 10000) {
+                break;
+            }
         }
     }
     // closes the file
