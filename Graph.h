@@ -15,7 +15,8 @@ struct Vertex {
                 index_ = -1;
                 parent_ = -1;
                 distance_ = 0;
-                degree_ = 0;    
+                degree_ = 0;   
+                label = "UNEXPLORED";
         }
 
         Vertex(string name, int index) {
@@ -24,6 +25,7 @@ struct Vertex {
                 parent_ = -1;
                 distance_ = 0;
                 degree_ = 0;
+                label = "UNEXPLORED";
         }
 
         string name_;
@@ -39,11 +41,13 @@ struct Edge {
         Edge() {
                 u = Vertex();
                 v = Vertex();
+                label = "UNEXPLORED";
         }
 
         Edge(Vertex u, Vertex v) {
                 this->u = u;
                 this->v = v;
+                label = "UNEXPLORED";
         }
 
         Vertex u;

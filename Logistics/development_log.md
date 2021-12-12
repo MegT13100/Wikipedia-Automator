@@ -15,6 +15,8 @@
 * Midproject check in 12/3 3:45pm
 
 ### Week 12/6
-* Began force directed graph implementation
+* processed data to fit our computer's capabilities
+* Completed force directed graph 
+* Began PageRank implementation
 
 ### Week 12/13

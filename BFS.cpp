@@ -6,18 +6,18 @@
 // will be more built in, but that will take some more
 
 BFS::BFS(Graph * g) {
-    for (Vertex * v : g->getVertices()) {
+    /*for (Vertex * v : g->getVertices()) {
         v->label = "UNEXPLORED";
         for (Vertex * w : g->getVertices()) {
             if(g->adjMatrix[v->index_][w->index_]) {
                 v->adjacent.push_back(w);
             }
         }
-    }
+    }*/
 
-    for (Edge* e : g->getEdgeList()) {
+    /*for (Edge* e : g->getEdgeList()) {
         e->label = "UNEXPLORED";
-    }
+    }*/
 
     for (Vertex * v : g->getVertices()) {
         if (v->label == "UNEXPLORED") {
@@ -55,8 +55,8 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
         return " " + v1;
     } 
     string toReturn;
-    int first;
-    int second;
+    int first = -1;
+    int second = -1;
     Vertex * a;
     Vertex * b;
     vector<string> firstHalf;
@@ -66,11 +66,18 @@ string BFS::shortestPath(Graph * g, string v1, string v2) {
             a = v;
             first = v->index_;
         }
-
         if (v->name_ == v2) {
             b = v;
             second = v->index_;
         }
+    }
+
+    if(first == -1) {
+        return v1 + " does not exist in this dataset";
+    }
+
+    if(second == -1) {
+        return v2 + " does not exist in this dataset";
     }
 
     while (a->parent_ != -1) {
