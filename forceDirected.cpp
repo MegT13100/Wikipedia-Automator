@@ -14,7 +14,7 @@ using namespace std;
  * @brief Sets up an initial, randomized layout for all of the vertices in the graph.
  * 
  * @param g Graph to be visualized. 
- * @return map<string, pair<int,int>> Returns a map of vertice names and coordinates (x,y)
+ * @return map<string, pair<int,int>> Returns a map of vertex names and coordinates (x,y)
  */
 
 map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* g) {
@@ -103,7 +103,7 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
  * @param cooling this is the cooling factor. As the algorithm keeps iterating, it theorhetically gets closer 
  *                 and closer to the optimal node distribution. Thus this dampens the forces moving the points so the points move 
  *                 less each iteration
- * @return map<string, pair<int, int>> : a map between the vertice names and the new positions 
+ * @return map<string, pair<int, int>> : a map between the vertex names and the new positions 
  */
 
 
@@ -140,7 +140,7 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
                 float magnitude = sqrt(pow(x,2) + pow(y,2));
                 x = x / magnitude;
                 y = y / magnitude;
-                // calculate attractive force vector for this vertice and then add it to the total.
+                // calculate attractive force vector for this vertex and then add it to the total.
                 float c = pow(dist, 2)/ length;
                 sumXa = sumXa + (x * c);
                 sumYa = sumYa + (y * c);
@@ -160,12 +160,12 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
                 float magnitude = sqrt(pow(x,2) + pow(y,2));
                 x = x / magnitude;
                 y = y / magnitude;
-                // calculate repulsive force vector for this vertice and then add it to the total.
+                // calculate repulsive force vector for this vertex and then add it to the total.
                 float c = pow(length, 2) / dist;
                 sumXr = sumXr + (x * c);
                 sumYr = sumYr + (y * c);   
             }
-            //calculate total force on u, add it to a map of the forces on each vertice
+            //calculate total force on u, add it to a map of the forces on each vertex
             float forceX = sumXr + sumXa;
             float forceY = sumYr + sumYa;
 
@@ -186,7 +186,7 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
 /**
  * @brief Getter for the initial positions mapping
  * 
- * @return map<string, pair<int,int>> Map of vertice names to (x,y) coordinates
+ * @return map<string, pair<int,int>> Map of vertex names to (x,y) coordinates
  */
 
 map<string, pair<int,int>> GraphVisualization::getPositions() {
