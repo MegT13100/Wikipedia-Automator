@@ -1,6 +1,9 @@
 #include "PageRank.h"
 
-void PageRank::initialize(Graph* g) {
+/*
+    Creates a matrix representation of the probabilities
+*/
+double** PageRank::createMatrix(Graph* g) {
     int num_v = g->getNumV();
     double** matrix = new double*[num_v];
     for (int i = 0; i < num_v; ++i) { // row
@@ -13,4 +16,5 @@ void PageRank::initialize(Graph* g) {
             }
         }
     }
+    return matrix;
 }

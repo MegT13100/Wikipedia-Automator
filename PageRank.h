@@ -7,5 +7,5 @@ class PageRank {
         PageRank();
 
     private:
-        void initialize(Graph* g);
+        double** createMatrix(Graph* g);
 };
