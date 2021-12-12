@@ -45,11 +45,11 @@ void addEdge(Graph* g, int src, int dest) {
     }
     Edge* edge = new Edge(*g->getVertices()[src], *g->getVertices()[dest]);
     g->getEdges()[src][dest]= edge;
-    // g->getEdges()[dest][src]= edge;
+    //g->getEdges()[dest][src]= edge;
 
     g->getEdgeList().push_back(edge);
 
-    // Increment the degree of the vertex
+    //Increment the degree of the vertex
     g->getVertices()[src]->degree_++;
 
     //add edge to adjecency list
@@ -57,7 +57,6 @@ void addEdge(Graph* g, int src, int dest) {
 
     // Mark as true on the matrix
     g->adjMatrix[src][dest] = 1;
-    //g->adjMatrix[dest][src] = 1;
 }
 
 /*int Graph::numOutgoingEdges(Graph const * const g, int v) {
@@ -132,7 +131,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             std::string word;
             int index; 
             is >> index;
-            if(index > 1000) {
+            if(index > 10) {
                 break;
             }
             while (is >> word) {
@@ -142,7 +141,6 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             count++;
         }
     }
-
     // closes the file
     infile.close();
     // initializes the graph with the vertices we read from the file
@@ -150,6 +148,8 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     g->setVertices(vertices);
     g->setNumV(vertices.size());
     g->setEdges(vector<vector<Edge*>>(g->getNumV(), vector<Edge*>(g->getNumV(), new Edge)));
+    cout << g->getNumV() << endl;
+    cout << count << endl;
 
     // code for reading and opening a file
     ifstream infile2(filename2);
@@ -161,7 +161,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             std::istringstream is(line);
             int src, dest; is >> src >> dest;
             // adds edge to adjacency matrix
-            if(src > 1000 || dest > 1000) {
+            if(src > 10 || dest > 10) {
                 continue;
             }
             addEdge(g, src, dest);

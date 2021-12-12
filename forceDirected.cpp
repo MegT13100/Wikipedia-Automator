@@ -61,13 +61,20 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
     }
 
     return make_pair(x,y);  
-    
 
 }
 
-
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-   
+    cs225::PNG * png = output;
+    for(auto it : layout) {
+        for(int x = it.second.first - 5; x <= it.second.first  + 5; x++) {
+            for(int y = it.second.second  - 5; y <= it.second.second + 5; y++) {
+                cs225::HSLAPixel & pixel = png->getPixel(x, y);
+                pixel.a = 0;
+            }
+        }
+    }
+    return png;
 }
 
 
@@ -147,6 +154,10 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
         i++;
     }
     return forceLayout;
+}
+
+map<string, pair<int,int>> GraphVisualization::getPositions() {
+    return positions;
 }
 
 // repulsive forces: 
