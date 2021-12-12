@@ -1,5 +1,5 @@
 EXENAME = graph
-OBJS = main.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o forceDirected.o
+OBJS = main.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o forceDirected.o PageRank.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -41,6 +41,9 @@ Graph.o : Graph.cpp Graph.h
 forceDirected.o : forceDirected.cpp forceDirected.h
 	$(CXX) $(CXXFLAGS) forceDirected.cpp
 
+PageRank.o : PageRank.cpp PageRank.h
+	$(CXX) $(CXXFLAGS) PageRank.cpp
+
 BFS.o : BFS.cpp BFS.h
 	$(CXX) $(CXXFLAGS) BFS.cpp
 
@@ -54,7 +57,7 @@ lodepng.o : cs225/lodepng/lodepng.cpp cs225/lodepng/lodepng.h
 	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp
 
 test: output_msg catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o
-	$(LD) catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o $(LDFLAGS) -o test
+	$(LD) catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o forceDirected.o PageRank.o $(LDFLAGS) -o test
 
 catchmain.o : cs225/catch/catchmain.cpp cs225/catch/catch.hpp
 	$(CXX) $(CXXFLAGS) cs225/catch/catchmain.cpp
