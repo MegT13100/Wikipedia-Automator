@@ -83,6 +83,9 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
     for(auto it : layout) {
         for(int x = it.second.first - 5; x <= it.second.first  + 5; x++) {
             for(int y = it.second.second  - 5; y <= it.second.second + 5; y++) {
+                if(x  > (int) output->width() - 1 && y > (int) output->height() - 1) {
+                    continue;
+                }
                 cs225::HSLAPixel & pixel = png->getPixel(x, y);
                 pixel.a = 0;
             }
@@ -124,7 +127,7 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
     map<string, pair<int, int>> forceLayout;
 
     // keep iterating until we've hit the maximum number of iterations, or the cooling factor hits 0
-    for (unsigned int i = 1; i < maxIter && cooling > 0; i++) {
+    for (int i = 1; i < maxIter && cooling > 0; i++) {
         for (Vertex* u : vertices) {
             // the total force to move u = "sum of all repulsive forces" + "sum of attractive forces from adjacent vertices"
 
