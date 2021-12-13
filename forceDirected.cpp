@@ -24,7 +24,7 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
     // set changing seed 
     //srand(time(0));
     g = graph;
-    unsigned int height = g->getNumV() * 5;
+    unsigned int height = g->getNumV() * 30;
     //cout<< height <<  endl;
     output = new cs225::PNG(height, height);
     //make a vertex list 
@@ -42,13 +42,8 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
             unsigned int y = distribution(generator);
             positions.insert({v->name_, make_pair(x,y)});
             // positions.insert({v.name_,inputs; });
-<<<<<<< HEAD
-        } else {
-            
-=======
         //if positions isn't empty, pick a point
         /*} else {
->>>>>>> 240041affb64e89586366aafde5a066c2cc59814
             pair<int,int> point = pickPoint(output);
             positions[v->name_] = point;
         }*/
@@ -82,17 +77,10 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
         } else {
             int dist = sqrt(pow(it.second.first - x, 2) + pow(it.second.second - y, 2));
             if (dist < 15) {
-<<<<<<< HEAD
-                return pickPoint(output);
-            }   
-        }
-    }
-=======
                 return pickPoint(output); 
             }
         }
     }*/
->>>>>>> 240041affb64e89586366aafde5a066c2cc59814
     return make_pair(x,y);  
 }
 
@@ -113,12 +101,42 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
                 double oy = it.second.second;
                 double d = sqrt(pow((ox - x), 2) + pow((oy - y), 2));
                 //make vertices into circle
-                if(abs(d) < 4) {
+                if(abs(d) < 10) {
                     cs225::HSLAPixel & pixel = png->getPixel(x, y);
                     pixel.l = 0;
                 }
-                //add edges/lines based on adjacency list
-                //for vertex in adjacency list, if the pixel is on the line ( (y1 -y2) = m(x1 -x2)), make it black 
+                
+            }
+        }
+    }
+    //add edges/lines based on adjacency list
+    //for vertex in adjacency list, if the pixel is on the line ((y1 -y2) = m(x1 -x2)), make it black 
+    for(auto v : g->getVertices()) {
+        //coordinates of current vertex in layout
+        int a = layout[v->name_].first;
+        int b = layout[v->name_].second;
+        for(auto v2 : v->adjacent) {
+            //coordinates of adjacent vertex in layout
+            int c = layout[v2->name_].first;
+            int d = layout[v2->name_].second;
+            //slope of line btwn the two points
+            //double m = (y2 - y1 / (x2 - x1);
+            //double b = 
+            for(int x = a; x < c; x++) {
+                for(int y = b; y < d; y++) {
+                    //all pixels on the line between the two points become black
+                    if(abs((c-a)*(y-b)-(d -b)*(x-a)) < 500) {
+                        /*if((x == c && y == d) ||(x == a && y == a)) {
+                            break;
+                        }*/
+                        //for(int x1 = x - 2; x1 < x + 2; x1++) {
+                            //for(int y1 = y - 2; y1 < y + 2; y1++) {
+                                cs225::HSLAPixel & pixel2 = png->getPixel(x, y);
+                                pixel2.l = 0;
+                            //}
+                        //}
+                    }
+                }
             }
         }
     }
