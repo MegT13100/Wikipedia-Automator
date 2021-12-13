@@ -11,11 +11,22 @@
 
 using namespace std;
 int main() {
+<<<<<<< HEAD
+   //building the graph from the fake files
+   cout << "main runs" << endl;
+   //the first file should be sorted by index!
+   //preprocess the data (only part of the dataset)
+   //pre-filter
+   //change to adjList
+   Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt"); //NO <3
+   //Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
+=======
    cout << "main running" << endl;
    //Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt", 3);
    //Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
    Graph* g = constructGraph("data/wiki-v.txt", "data/wiki-e.txt", 300);
    cout << "graph constructed . . ." << endl;
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
    GraphVisualization v;
    cout << "graph visualization created . . ." << endl;
    //BFS b(g);

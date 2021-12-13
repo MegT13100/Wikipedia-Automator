@@ -96,6 +96,11 @@ class Graph {
          * @return pointer to a graph object
          */
         Graph* createVertices(int numV);
+<<<<<<< HEAD
+
+        Graph* constructGraph(const string& filename, const string& filename2); // no third parameter
+
+=======
         /**
          * @brief creates a graph from two data files: one with the vertices and the second with the edges
          * @param filename file with vertices formatted 0 Vertex Name
@@ -110,6 +115,7 @@ class Graph {
          * @param src index of the source vertex for the edge
          * @param dest index of the destination vertex for the edge
          */
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
         void addEdge(Graph* g, int src, int dest);
         /**
          * @brief searches the adjacency matrix to see if the edge exists

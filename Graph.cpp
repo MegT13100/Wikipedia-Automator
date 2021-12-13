@@ -104,6 +104,9 @@ Graph* createVertices(int numV) {
     return g;
 }
 
+<<<<<<< HEAD
+Graph* constructGraph(const string& filename, const string& filename2) {
+=======
 /**
  * @brief creates a graph from two data files: one with the vertices and the second with the edges
  * @param filename file with vertices formatted 0 Vertex Name
@@ -112,6 +115,7 @@ Graph* createVertices(int numV) {
  * @return pointer to a graph object
  */
 Graph* constructGraph(const string& filename, const string& filename2, int nData) {
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
     // Construct graph
     vector<Vertex*> vertices;
     string line;
@@ -129,11 +133,17 @@ Graph* constructGraph(const string& filename, const string& filename2, int nData
             //assigns index to the index in the file
             int index; 
             is >> index;
+<<<<<<< HEAD
+            //if(index > nData) {
+                //break;
+            //}
+=======
             //making sure the index is smaller than the graph size
             if(index > nData) {
                 break;
             }
             //creates a string with the article name
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
             while (is >> word) {
                 name = name + " " + word;
             }
@@ -158,10 +168,17 @@ Graph* constructGraph(const string& filename, const string& filename2, int nData
             // code for getting the index for the vertices in the edge
             std::istringstream is(line);
             int src, dest; is >> src >> dest;
+<<<<<<< HEAD
+            // adds edge to adjacency matrix
+            //if(src > nData || dest > nData) {
+                //continue;
+            //}
+=======
             // adds edge to adjacency matrix, making sure that it is not an edge between a vertex that is larger than the graph
             if(src > nData || dest > nData) {
                 continue;
             }
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
             addEdge(g, src, dest);
         }
     }
