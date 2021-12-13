@@ -61,7 +61,6 @@ test: output_msg catchmain.o graph_tests.o bfs_tests.o forcedirected_tests.o pag
 
 catchmain.o : cs225/catch/catchmain.cpp cs225/catch/catch.hpp
 	$(CXX) $(CXXFLAGS) cs225/catch/catchmain.cpp
-
 graph_tests.o : tests/graph_tests.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) tests/graph_tests.cpp
 
@@ -73,7 +72,6 @@ forcedirected_tests.o : tests/forcedirected_tests.cpp cs225/catch/catch.hpp Grap
 
 pagerank_tests.o : tests/pagerank_tests.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) tests/pagerank_tests.cpp
-
 
 clean :
 	-rm -f *.o $(EXENAME) test
