@@ -28,6 +28,7 @@ class GraphVisualization {
         cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
     private:
         // randomly picks a valid point within the space
+        Graph * g;
         pair<int,int> pickPoint(cs225::PNG* output);
         map<string, pair<int,int>> positions;
         map<string, pair<int,int>> visited;

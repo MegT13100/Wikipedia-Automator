@@ -20,10 +20,10 @@ using namespace std;
  * @return map<string, pair<int,int>> Returns a map of vertex names and coordinates (x,y)
  */
 
-map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* g) {
+map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
     // set changing seed 
     //srand(time(0));
-
+    g = graph;
     unsigned int height = g->getNumV() * 5;
     //cout<< height <<  endl;
     output = new cs225::PNG(height, height);
@@ -84,7 +84,7 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
 }
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-    //add edges/lines based on adjacency list to 
+    
     cs225::PNG* png = new cs225::PNG(output->width(), output->height());
     for(unsigned int x = 0; x < output->width(); x++) {
         for(unsigned int y = 0; y < output->height(); y++) {
@@ -97,6 +97,8 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
                     cs225::HSLAPixel & pixel = png->getPixel(x, y);
                     pixel.l = 0;
                 }
+                //add edges/lines based on adjacency list
+                //for vertex in adjacency list, if the pixel is on the line ( (y1 -y2) = m(x1 -x2)), make it black 
             }
         }
     }
