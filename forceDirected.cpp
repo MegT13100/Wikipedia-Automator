@@ -60,29 +60,6 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
  * @return pair<int,int> a point (x,y)
  */
 
-pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
-    // set changing seed 
-   // srand(time(0));
-    std::default_random_engine generator (seed);
-    std::uniform_int_distribution<int> distribution(0, output->height() - 5);
-    visited = positions;
-    // pick numbers for the coordinate values that do not lieon the peripheral
-    unsigned int x = distribution(generator);
-    unsigned int y = distribution(generator);
-    //cout << x << " " << y << endl;
-    // iterate through the map (this syntax may be messed up)
-    /*for (auto it : positions) {
-        if (it.second.first == x && it.second.second == y) {
-            return pickPoint(output);
-        } else {
-            int dist = sqrt(pow(it.second.first - x, 2) + pow(it.second.second - y, 2));
-            if (dist < 15) {
-                return pickPoint(output); 
-            }
-        }
-    }*/
-    return make_pair(x,y);  
-}
 
 /**
  * @brief Draws the graph layout onto a PNG, in order to be written into a visual file.
