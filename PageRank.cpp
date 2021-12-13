@@ -22,7 +22,7 @@ double** PageRank::CreateMatrix() {
 }
 
 /*
-    NOTE: haven't use the damping factor yet
+    Returns the PageRanks of the vertices as a list (in order of the vertex indices)
 
     PR(A) = (1-d) + d(PR(T_i)/C(T_i) + ... + PR(T_n)/C(T_n))
     - PR(A) is the PageRank of page A
