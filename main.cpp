@@ -40,4 +40,5 @@ int main() {
    /*for(auto it : newMap) {
       cout << it.first << " " << it.second.first << " " << it.second.second << endl;
    }*/
+   return 0;
 }

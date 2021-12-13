@@ -84,17 +84,19 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
 }
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-    //make vertices into circle
     //add edges/lines based on adjacency list to 
     cs225::PNG* png = new cs225::PNG(output->width(), output->height());
-    for(auto it: layout) {
-        for(unsigned int x = it.second.first - 2; x <= (unsigned) it.second.first + 2; x++) {
-            for(unsigned int y = it.second.second  - 2; y <= (unsigned) it.second.second+ 2; y++) {
-                if(x  > png->width() - 1 || y > png->height() - 1) {
-                    continue;
+    for(unsigned int x = 0; x < output->width(); x++) {
+        for(unsigned int y = 0; y < output->height(); y++) {
+            for(auto it: layout) {
+                double ox = it.second.first;
+                double oy = it.second.second;
+                double d = sqrt(pow((ox - x), 2) + pow((oy - y), 2));
+                //make vertices into circle
+                if(abs(d) < 4) {
+                    cs225::HSLAPixel & pixel = png->getPixel(x, y);
+                    pixel.l = 0;
                 }
-                cs225::HSLAPixel & pixel = png->getPixel(x, y);
-                pixel.l = 0;
             }
         }
     }
