@@ -24,7 +24,7 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
     // set changing seed 
     //srand(time(0));
     g = graph;
-    unsigned int height = g->getNumV() * 5;
+    unsigned int height = g->getNumV() * 30;
     //cout<< height <<  endl;
     output = new cs225::PNG(height, height);
     //make a vertex list 
@@ -50,6 +50,7 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
     }
     return positions;
 }
+
 /**
  * @brief This is a helper function to determine the initial layout. It is meant to find valid x and y values for each point 
  *         such that each point does not overlap (each point has a radius of 5px) and that they are not less that 5px apart. 
@@ -83,8 +84,15 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
     return make_pair(x,y);  
 }
 
+/**
+ * @brief Draws the graph layout onto a PNG, in order to be written into a visual file.
+ * 
+ * @param layout The map of vertex coordinates used to visualize the graph
+ * @return cs225::PNG* 
+ */
+
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-    
+    //draws vertices based on layout inputted
     cs225::PNG* png = new cs225::PNG(output->width(), output->height());
     for(unsigned int x = 0; x < output->width(); x++) {
         for(unsigned int y = 0; y < output->height(); y++) {
@@ -92,13 +100,45 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
                 double ox = it.second.first;
                 double oy = it.second.second;
                 double d = sqrt(pow((ox - x), 2) + pow((oy - y), 2));
-                //make vertices into circle
-                if(abs(d) < 4) {
+                //make vertices into circle of radius 10 pixels
+                if(abs(d) < 10) {
                     cs225::HSLAPixel & pixel = png->getPixel(x, y);
                     pixel.l = 0;
                 }
-                //add edges/lines based on adjacency list
-                //for vertex in adjacency list, if the pixel is on the line ( (y1 -y2) = m(x1 -x2)), make it black 
+                
+            }
+        }
+    }
+    //add edges/lines based on adjacency list
+    //for vertex in adjacency list, if the pixel is on the line ((y1 -y2) = m(x1 -x2)), make it black 
+    for(auto v : g->getVertices()) {
+        //coordinates of current vertex in layout
+        int a = layout[v->name_].first;
+        int b = layout[v->name_].second;
+        for(auto v2 : v->adjacent) {
+            //coordinates of adjacent vertex in layout
+            int c = layout[v2->name_].first;
+            int d = layout[v2->name_].second;
+            int count = 0;
+            for(int x = 0; x < (int) output->width(); x++) {
+                for(int y = 0; y < (int) output->height(); y++) {
+                    //all pixels on the line between the two points become black
+                    if(abs((c-a)*(y-b)-(d -b)*(x-a)) < 500) {
+                        //increments count when the first vertex is reached
+                        if((x == a && y == b)) {
+                            count++;
+                        }
+                        //increments count when the second vertex is reached
+                        if((x == c && y == d)) {
+                            count++;
+                        }
+                        //only draws the line when it is between the two vertices
+                        if(count == 1) {
+                            cs225::HSLAPixel & pixel2 = png->getPixel(x, y);
+                            pixel2.l = 0;
+                        }
+                    }
+                }
             }
         }
     }
@@ -119,7 +159,6 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
  *                 less each iteration
  * @return map<string, pair<int, int>> : a map between the vertex names and the new positions 
  */
-
 
 map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
                                                              int maxIter, int length, float cooling) {

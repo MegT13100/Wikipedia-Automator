@@ -1,23 +1,11 @@
 #include "BFS.h"
 
-// cd cs225git/matatov-suminc2-mrtobin2-emilyc7
-// random idea, but I feel like currently we need the two traversal and shortest path functions because we are doing a more straighforward implementation
-// I think if we wanted to make it more efficient we could combine the two so that the traversal is from the first article name and that way shortest path
-// will be more built in, but that will take some more
 
+/**
+ * @brief constructor of BFS class, performs the traversal on the graph
+ * @param the graph to traverse
+ */
 BFS::BFS(Graph * g) {
-    /*for (Vertex * v : g->getVertices()) {
-        v->label = "UNEXPLORED";
-        for (Vertex * w : g->getVertices()) {
-            if(g->adjMatrix[v->index_][w->index_]) {
-                v->adjacent.push_back(w);
-            }
-        }
-    }*/
-
-    /*for (Edge* e : g->getEdgeList()) {
-        e->label = "UNEXPLORED";
-    }*/
 
     for (Vertex * v : g->getVertices()) {
         if (v->label == "UNEXPLORED") {
@@ -26,6 +14,11 @@ BFS::BFS(Graph * g) {
     }
 }
 
+/**
+ * @brief helper function for traversing the graph
+ * @param g graph to traverse 
+ * @param v vertex to begin the traversal on
+ */
 void BFS::traverse(Graph * g, Vertex * v) {
     queue<Vertex*> q;
     v->label = "VISITED";
@@ -49,7 +42,13 @@ void BFS::traverse(Graph * g, Vertex * v) {
     }
 }
 
-//this is probably gonna be a really inelegant implementation, but I think it will work, feel free to modifiy it 
+/**
+ * @brief constructor of BFS class, performs the traversal on the graph
+ * @param g the graph to traverse
+ * @param v1 name of first vertex
+ * @param v2 name of second vertex
+ * @return string of the names of vertices creating the shortest path
+ */
 string BFS::shortestPath(Graph * g, string v1, string v2) {
     if(v1 == v2) {
         return " " + v1;

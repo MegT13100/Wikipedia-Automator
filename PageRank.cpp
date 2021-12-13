@@ -22,7 +22,7 @@ double** PageRank::CreateMatrix() {
 }
 
 /*
-    NOTE: haven't use the damping factor yet
+    Returns the PageRanks of the vertices as a list (in order of the vertex indices)
 
     PR(A) = (1-d) + d(PR(T_i)/C(T_i) + ... + PR(T_n)/C(T_n))
     - PR(A) is the PageRank of page A
@@ -41,14 +41,22 @@ vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
 
     for (size_t itr = 0; itr < num_iterations; ++itr) {
         for (int i = 0; i < num_v; ++i) {
+<<<<<<< HEAD
             int sum = d;
+=======
+            int sum = 1 - d;
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
             for (int vertex_index : inbound_links[i]) {
                 int num_outgoing_links = graph_->getVertices()[vertex_index]->degree_;
                 if (num_outgoing_links > 0) {
                     sum += prev[vertex_index] / num_outgoing_links;
                 }
             }
+<<<<<<< HEAD
             curr[i] = sum * d;
+=======
+            curr[i] = d * sum;
+>>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
         }
         prev = curr;
     }
