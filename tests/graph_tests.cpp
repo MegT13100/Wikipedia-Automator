@@ -13,7 +13,7 @@ using cs225::HSLAPixel;
 
 
 TEST_CASE("Fake data edges added correctly", "[weight=1][graph]") {
-  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
+  Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
   REQUIRE( containsEdge(g, 0, 1) == true);
   REQUIRE( containsEdge(g, 6, 5) == true);
   REQUIRE( containsEdge(g, 3, 0) == true);
@@ -24,7 +24,7 @@ TEST_CASE("Fake data edges added correctly", "[weight=1][graph]") {
 }
 
 TEST_CASE("Fake data vertices added correctly", "[weight=1][graph]") {
-  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
+  Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
   vector<string> v = {"animals", "dog", "cat", "wolf", "cow", "food", "soup", "mac and cheese"};
   for(int n = 0; n < (int) v.size(); n++) {
     REQUIRE(v[n] == g->getVertices()[n]->name_);
@@ -32,7 +32,7 @@ TEST_CASE("Fake data vertices added correctly", "[weight=1][graph]") {
 }
 
 TEST_CASE("contains edge is correct", "[weight=1][graph]") {
-  Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
+  Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
   REQUIRE( containsEdge(g, 0, 1) == true);
   REQUIRE( containsEdge(g, 6, 5) == true);
   REQUIRE( containsEdge(g, 3, 0) == true);

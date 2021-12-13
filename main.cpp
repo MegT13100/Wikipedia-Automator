@@ -13,7 +13,7 @@ using namespace std;
 int main() {
    cout << "main running" << endl;
    //Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt", 3);
-   //Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
+   //Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
    Graph* g = constructGraph("data/wiki-v.txt", "data/wiki-e.txt", 100);
    cout << "graph constructed . . ." << endl;
    GraphVisualization v;
