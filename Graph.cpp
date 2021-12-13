@@ -104,7 +104,14 @@ Graph* createVertices(int numV) {
     return g;
 }
 
-Graph* constructGraph(const string& filename, const string& filename2) {
+/**
+ * @brief creates a graph from two data files: one with the vertices and the second with the edges
+ * @param filename file with vertices formatted 0 Vertex Name
+ * @param filename2 file with edges formatted 0 100
+ * @param numData number of datapoints from the file that should be read in 
+ * @return pointer to a graph object
+ */
+Graph* constructGraph(const string& filename, const string& filename2, int nData) {
     // Construct graph
     vector<Vertex*> vertices;
     string line;
@@ -122,9 +129,11 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             //assigns index to the index in the file
             int index; 
             is >> index;
-            //if(index > nData) {
-                //break;
-            //}
+            //making sure the index is smaller than the graph size
+            if(index > nData) {
+                break;
+            }
+            //creates a string with the article name
             while (is >> word) {
                 name = name + " " + word;
             }
@@ -149,10 +158,10 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             // code for getting the index for the vertices in the edge
             std::istringstream is(line);
             int src, dest; is >> src >> dest;
-            // adds edge to adjacency matrix
-            //if(src > nData || dest > nData) {
-                //continue;
-            //}
+            // adds edge to adjacency matrix, making sure that it is not an edge between a vertex that is larger than the graph
+            if(src > nData || dest > nData) {
+                continue;
+            }
             addEdge(g, src, dest);
         }
     }
