@@ -42,13 +42,8 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
             unsigned int y = distribution(generator);
             positions.insert({v->name_, make_pair(x,y)});
             // positions.insert({v.name_,inputs; });
-<<<<<<< HEAD
-        } else {
-            
-=======
         //if positions isn't empty, pick a point
         /*} else {
->>>>>>> 240041affb64e89586366aafde5a066c2cc59814
             pair<int,int> point = pickPoint(output);
             positions[v->name_] = point;
         }*/
@@ -82,17 +77,10 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
         } else {
             int dist = sqrt(pow(it.second.first - x, 2) + pow(it.second.second - y, 2));
             if (dist < 15) {
-<<<<<<< HEAD
-                return pickPoint(output);
-            }   
-        }
-    }
-=======
                 return pickPoint(output); 
             }
         }
     }*/
->>>>>>> 240041affb64e89586366aafde5a066c2cc59814
     return make_pair(x,y);  
 }
 

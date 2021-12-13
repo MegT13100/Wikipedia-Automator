@@ -28,9 +28,11 @@ int main() {
    map<string, pair<int, int>> layout = v.initialLayout(g);
    cs225::PNG * png = v.drawGraph(layout);
    png->writeToFile("graph.png");
-   /*for(auto it : layout) {
-      cout << it.first << " " << it.second.first << " " << it.second.second << endl;
-   }*/
+   // cout << layout.size() << endl;
+   // for(auto it : layout) {
+   //    cout << "hello" << endl;
+   //    cout << it.first << " " << it.second.first << " " << it.second.second << endl;
+   // }
    //cout << "force directed run" << endl;
    //cout << "output width: " << v.output->width() << endl;
    map<string, pair<int, int>> newMap = v.constructForceDirectedGraph(layout, g, 30, 101, 1);

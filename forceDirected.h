@@ -47,44 +47,17 @@ class GraphVisualization {
          * @return map<string, pair<int,int>> 
          */
         map<string, pair<int,int>> getPositions();
-<<<<<<< HEAD
-
-        /**
-         * @brief Draws the graph layout onto a PNG, in order to be written into a visual file.
-         * 
-         * @param layout The map of vertex coordinates used to visualize the graph
-         * @return cs225::PNG* 
-         */
-        cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
-    private:
-        /**
-         * @brief This is a helper function to determine the initial layout. It is meant to find valid x and y values for each point 
-         *         such that each point does not overlap (each point has a radius of 5px) and that they are not less that 5px apart. 
-         *         Also they should be a sufficient distance from the edge of the png. 
-         * 
-         * @param output the PNG display of the graph (used to get the width and height to determine the boundaries)
-         * @return pair<int,int> a point (x,y)
-         */
-=======
         cs225::PNG * output;
         cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
     private:
         // randomly picks a valid point within the space
         Graph * g;
->>>>>>> 240041affb64e89586366aafde5a066c2cc59814
         pair<int,int> pickPoint(cs225::PNG* output);
         /**
          * @brief map that holds the initial randomized positions for each vertex in the graph. Maps the names of the
          *        vertices to (x,y) coordinates 
          */
         map<string, pair<int,int>> positions;
-<<<<<<< HEAD
-        /**
-         * @brief a PNG that holds a visualization of the graph
-         */
-        cs225::PNG * output;
-=======
         map<string, pair<int,int>> visited;
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
->>>>>>> 240041affb64e89586366aafde5a066c2cc59814
 };
