@@ -47,12 +47,16 @@ class GraphVisualization {
          * @return map<string, pair<int,int>> 
          */
         map<string, pair<int,int>> getPositions();
+<<<<<<< HEAD
+        cs225::PNG * output;
+=======
         /**
          * @brief Draws the graph layout onto a PNG, in order to be written into a visual file.
          * 
          * @param layout The map of vertex coordinates used to visualize the graph
          * @return cs225::PNG* 
          */
+>>>>>>> 53a1fbac13efc9dbf1f3341c41bed628b2c8ea5f
         cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
     private:
         // randomly picks a valid point within the space
@@ -63,10 +67,13 @@ class GraphVisualization {
          *        vertices to (x,y) coordinates 
          */
         map<string, pair<int,int>> positions;
+<<<<<<< HEAD
+=======
         /**
          * @brief a PNG that holds a visualization of the graph
          */
         cs225::PNG * output;
+>>>>>>> 53a1fbac13efc9dbf1f3341c41bed628b2c8ea5f
         map<string, pair<int,int>> visited;
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 };
