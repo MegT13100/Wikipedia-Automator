@@ -17,7 +17,7 @@ int main() {
    //preprocess the data (only part of the dataset)
    //pre-filter
    //change to adjList
-   Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt", 50);
+   Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt"); //NO <3
    //Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
    GraphVisualization v;
    //printGraph(g);

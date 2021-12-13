@@ -87,7 +87,7 @@ class Graph {
 
         Graph* createVertices(int numV);
 
-        Graph* constructGraph(const string& filename, const string& filename2, int numData);
+        Graph* constructGraph(const string& filename, const string& filename2); // no third parameter
 
         void addEdge(Graph* g, int src, int dest);
 
