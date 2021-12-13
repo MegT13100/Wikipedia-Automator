@@ -122,19 +122,21 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
             //slope of line btwn the two points
             //double m = (y2 - y1 / (x2 - x1);
             //double b = 
-            for(int x = a; x < c; x++) {
-                for(int y = b; y < d; y++) {
+            int count = 0;
+            for(int x = 0; x < (int) output->width(); x++) {
+                for(int y = 0; y < (int) output->height(); y++) {
                     //all pixels on the line between the two points become black
                     if(abs((c-a)*(y-b)-(d -b)*(x-a)) < 500) {
-                        /*if((x == c && y == d) ||(x == a && y == a)) {
-                            break;
-                        }*/
-                        //for(int x1 = x - 2; x1 < x + 2; x1++) {
-                            //for(int y1 = y - 2; y1 < y + 2; y1++) {
-                                cs225::HSLAPixel & pixel2 = png->getPixel(x, y);
-                                pixel2.l = 0;
-                            //}
-                        //}
+                        if((x == a && y == b)) {
+                            count++;
+                        }
+                        if((x == c && y == d)) {
+                            count++;
+                        }
+                        if(count == 1) {
+                            cs225::HSLAPixel & pixel2 = png->getPixel(x, y);
+                            pixel2.l = 0;
+                        }
                     }
                 }
             }
