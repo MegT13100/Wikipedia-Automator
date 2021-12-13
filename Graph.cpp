@@ -110,7 +110,7 @@ Graph* createVertices(int numV) {
     return g;
 }
 
-Graph* constructGraph(const string& filename, const string& filename2) {
+Graph* constructGraph(const string& filename, const string& filename2, int nData) {
     // Construct graph
     vector<Vertex*> vertices;
     string line;
@@ -131,7 +131,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             std::string word;
             int index; 
             is >> index;
-            if(index > 10) {
+            if(index > nData) {
                 break;
             }
             while (is >> word) {
@@ -148,8 +148,8 @@ Graph* constructGraph(const string& filename, const string& filename2) {
     g->setVertices(vertices);
     g->setNumV(vertices.size());
     g->setEdges(vector<vector<Edge*>>(g->getNumV(), vector<Edge*>(g->getNumV(), new Edge)));
-    cout << g->getNumV() << endl;
-    cout << count << endl;
+    // cout << g->getNumV() << endl;
+    //cout << count << endl;
 
     // code for reading and opening a file
     ifstream infile2(filename2);
@@ -161,7 +161,7 @@ Graph* constructGraph(const string& filename, const string& filename2) {
             std::istringstream is(line);
             int src, dest; is >> src >> dest;
             // adds edge to adjacency matrix
-            if(src > 10 || dest > 10) {
+            if(src > nData || dest > nData) {
                 continue;
             }
             addEdge(g, src, dest);

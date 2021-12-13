@@ -32,7 +32,7 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME) : output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o : main.cpp Graph.h BFS.h cs225/PNG.h cs225/HSLAPixel.h
+main.o : main.cpp Graph.h BFS.h cs225/PNG.h cs225/HSLAPixel.h forceDirected.h PageRank.h
 	$(CXX) $(CXXFLAGS) main.cpp
 
 Graph.o : Graph.cpp Graph.h

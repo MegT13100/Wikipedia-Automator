@@ -3,6 +3,7 @@
 #include "Graph.h"
 #include "BFS.h"
 #include "forceDirected.h"
+#include <string>
 
 //to run main run ./graph
 //possible visualizations: https://libcinder.org/
@@ -16,15 +17,28 @@ int main() {
    //preprocess the data (only part of the dataset)
    //pre-filter
    //change to adjList
-   //Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt");
-   Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt");
+   Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt", 50);
+   //Graph* g = constructGraph("fake_data_v.txt", "fake_data_e.txt", 10);
    GraphVisualization v;
    //printGraph(g);
    //FS b(g);
    //b.traverse(g, g->getVertices()[2]);
    //string solution = b.shortestPath(g, "Arkansas Highway 99", "Lower Parker School");
    //cout << solution << endl;
-   v.initialLayout(g);
-   cs225::PNG * png = v.drawGraph(v.getPositions());
+   map<string, pair<int, int>> layout = v.initialLayout(g);
+   cs225::PNG * png = v.drawGraph(layout);
    png->writeToFile("graph.png");
+   /*for(auto it : layout) {
+      cout << it.first << " " << it.second.first << " " << it.second.second << endl;
+   }*/
+   //cout << "force directed run" << endl;
+   //cout << "output width: " << v.output->width() << endl;
+   map<string, pair<int, int>> newMap = v.constructForceDirectedGraph(layout, g, 30, 101, 1);
+   cs225::PNG * png2 = v.drawGraph(newMap);
+   png2->writeToFile("forceDirectedGraph.png");
+   cout << "done" << endl;
+   /*for(auto it : newMap) {
+      cout << it.first << " " << it.second.first << " " << it.second.second << endl;
+   }*/
+   return 0;
 }

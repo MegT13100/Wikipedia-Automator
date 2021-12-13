@@ -16,7 +16,7 @@
 
 ### Week 12/6
 * processed data to fit our computer's capabilities
-* Completed force directed graph 
-* Began PageRank implementation
+* Completed force directed graph and visualization
+* Began PageRank implementation and test cases
 
 ### Week 12/13
