@@ -42,14 +42,20 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
             unsigned int y = distribution(generator);
             positions.insert({v->name_, make_pair(x,y)});
             // positions.insert({v.name_,inputs; });
+<<<<<<< HEAD
+        } else {
+            
+=======
         //if positions isn't empty, pick a point
         /*} else {
+>>>>>>> 240041affb64e89586366aafde5a066c2cc59814
             pair<int,int> point = pickPoint(output);
             positions[v->name_] = point;
         }*/
     }
     return positions;
 }
+
 /**
  * @brief This is a helper function to determine the initial layout. It is meant to find valid x and y values for each point 
  *         such that each point does not overlap (each point has a radius of 5px) and that they are not less that 5px apart. 
@@ -76,12 +82,26 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
         } else {
             int dist = sqrt(pow(it.second.first - x, 2) + pow(it.second.second - y, 2));
             if (dist < 15) {
+<<<<<<< HEAD
+                return pickPoint(output);
+            }   
+        }
+    }
+=======
                 return pickPoint(output); 
             }
         }
     }*/
+>>>>>>> 240041affb64e89586366aafde5a066c2cc59814
     return make_pair(x,y);  
 }
+
+/**
+ * @brief Draws the graph layout onto a PNG, in order to be written into a visual file.
+ * 
+ * @param layout The map of vertex coordinates used to visualize the graph
+ * @return cs225::PNG* 
+ */
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
     
@@ -119,7 +139,6 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
  *                 less each iteration
  * @return map<string, pair<int, int>> : a map between the vertex names and the new positions 
  */
-
 
 map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
                                                              int maxIter, int length, float cooling) {
