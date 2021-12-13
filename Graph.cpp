@@ -148,8 +148,8 @@ Graph* constructGraph(const string& filename, const string& filename2, int nData
     g->setVertices(vertices);
     g->setNumV(vertices.size());
     g->setEdges(vector<vector<Edge*>>(g->getNumV(), vector<Edge*>(g->getNumV(), new Edge)));
-    cout << g->getNumV() << endl;
-    cout << count << endl;
+    // cout << g->getNumV() << endl;
+    //cout << count << endl;
 
     // code for reading and opening a file
     ifstream infile2(filename2);

@@ -7,6 +7,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <utility>
+#include <chrono>
+#include <random>
+#include <cstdlib>
 
 using namespace std;
 
@@ -18,29 +21,33 @@ using namespace std;
  */
 
 map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* g) {
-    // set up a blank PNG as output
+    // set changing seed 
+    //srand(time(0));
 
     unsigned int height = g->getNumV() * 5;
-
-    cs225::PNG* output = new cs225::PNG(height, height);
+    //cout<< height <<  endl;
+    output = new cs225::PNG(height, height);
     //make a vertex list 
     vector<Vertex*> vertices = g->getVertices();
+    std::default_random_engine generator (seed);
+    std::uniform_int_distribution<int> distribution(0, height - 5);
+    //std::uniform_int_distribution<int> height(0, height - 5);
    
     // go through the vertices and add them to the map.  
     for (Vertex* v : vertices) {
-        if (positions.empty()) {
+        //if positions is empty, add a random coordinate
+        //if (positions.empty()) {
             vector<int> inputs;
-            int x = rand() % output->width() - 10;
-            int y = rand() % output->height() - 10;
+            unsigned int x = distribution(generator);
+            unsigned int y = distribution(generator);
             positions.insert({v->name_, make_pair(x,y)});
             // positions.insert({v.name_,inputs; });
-        } else {
+        //if positions isn't empty, pick a point
+        /*} else {
             pair<int,int> point = pickPoint(output);
             positions[v->name_] = point;
-
-        }
+        }*/
     }
-
     return positions;
 }
 /**
@@ -53,45 +60,44 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* g) {
  */
 
 pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
-
     // set changing seed 
-    srand(time(0));
-    
+   // srand(time(0));
+    std::default_random_engine generator (seed);
+    std::uniform_int_distribution<int> distribution(0, output->height() - 5);
+    visited = positions;
     // pick numbers for the coordinate values that do not lieon the peripheral
-    int x = rand() % output->width() - 10;
-    int y = rand() % output->height() - 10;
-
+    unsigned int x = distribution(generator);
+    unsigned int y = distribution(generator);
+    //cout << x << " " << y << endl;
     // iterate through the map (this syntax may be messed up)
-    for (auto const& [key, val] : positions) {
-        if (val.first == x && val.second == y) {
+    /*for (auto it : positions) {
+        if (it.second.first == x && it.second.second == y) {
             return pickPoint(output);
         } else {
-            int dist = sqrt(pow(val.first - x, 2) + pow(val.second - y, 2));
+            int dist = sqrt(pow(it.second.first - x, 2) + pow(it.second.second - y, 2));
             if (dist < 15) {
-                return pickPoint(output);
+                return pickPoint(output); 
             }
-            
         }
-    }
-
+    }*/
     return make_pair(x,y);  
-
 }
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-    cs225::PNG * png = output;
-    for(auto it : layout) {
-        for(int x = it.second.first - 5; x <= it.second.first  + 5; x++) {
-            for(int y = it.second.second  - 5; y <= it.second.second + 5; y++) {
-                if(x  > (int) output->width() - 1 && y > (int) output->height() - 1) {
+    //make vertices into circle
+    //add edges/lines based on adjacency list to 
+    for(auto it: layout) {
+        for(unsigned int x = it.second.first - 2; x <= (unsigned) it.second.first + 2; x++) {
+            for(unsigned int y = it.second.second  - 2; y <= (unsigned) it.second.second+ 2; y++) {
+                if(x  > output->width() - 1 || y > output->height() - 1) {
                     continue;
                 }
-                cs225::HSLAPixel & pixel = png->getPixel(x, y);
-                pixel.a = 0;
+                cs225::HSLAPixel & pixel = output->getPixel(x, y);
+                pixel.l = 0;
             }
         }
     }
-    return png;
+    return output;
 }
 /**
  * @brief This is an implementation of the Fructerman-Reingold force-directed graph algorithm. The algorithm images a situation
@@ -176,11 +182,11 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
         }
          
         // calculate new position for each using forces and the cooling constant, add to a map of the new graph layout. 
-        for (auto const& [key, val] : forces) {
+        for (auto it: forces) {
             cooling = pow(cooling, i);
-            int x = layout[key].first + (val.first * cooling);
-            int y = layout[key].second + (val.second * cooling);
-            forceLayout[key] = make_pair(x,y);
+            int x = (int) (layout[it.first].first + (it.second.first * cooling)) % (int) output->width();
+            int y =  (int) (layout[it.first].second + (it.second.second * cooling)) % (int) output->width();
+            forceLayout[it.first] = make_pair(abs(x), abs(y));
         }
     }
     return forceLayout;

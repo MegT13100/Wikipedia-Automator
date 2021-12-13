@@ -4,6 +4,14 @@
 #include "cs225/PNG.h"
 #include <vector>
 #include <map>
+#include <vector>
+#include <map>
+#include <time.h>
+#include <cmath>
+#include <cstdlib>
+#include <utility>
+#include <chrono>
+#include <random>
 
 using namespace std;
 
@@ -16,11 +24,12 @@ class GraphVisualization {
         // sets up a random layout of the graph
         map<string, pair<int,int>> initialLayout(Graph* g);
         map<string, pair<int,int>> getPositions();
-        
+        cs225::PNG * output;
         cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
     private:
         // randomly picks a valid point within the space
         pair<int,int> pickPoint(cs225::PNG* output);
         map<string, pair<int,int>> positions;
-        cs225::PNG * output;
+        map<string, pair<int,int>> visited;
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 };
