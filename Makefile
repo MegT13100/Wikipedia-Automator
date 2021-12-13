@@ -56,17 +56,24 @@ HSLAPixel.o : cs225/HSLAPixel.cpp cs225/HSLAPixel.h
 lodepng.o : cs225/lodepng/lodepng.cpp cs225/lodepng/lodepng.h
 	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp
 
-test: output_msg catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o
-	$(LD) catchmain.o tests-part1.o tests-part2.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o forceDirected.o PageRank.o $(LDFLAGS) -o test
+test: output_msg catchmain.o tests-graph.o tests-bfs.o tests-forcedirected.o tests-pagerank.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o
+	$(LD) catchmain.o tests-graph.o tests-bfs.o tests-forcedirected.o tests-pagerank.o PNG.o HSLAPixel.o lodepng.o Graph.o BFS.o forceDirected.o PageRank.o $(LDFLAGS) -o test
 
 catchmain.o : cs225/catch/catchmain.cpp cs225/catch/catch.hpp
 	$(CXX) $(CXXFLAGS) cs225/catch/catchmain.cpp
 
-tests-part1.o : tests/tests-part1.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
-	$(CXX) $(CXXFLAGS) tests/tests-part1.cpp
+tests-graph.o : tests/graph_tests.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) tests/graph_tests.cpp
 
-tests-part2.o : tests/tests-part2.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
-	$(CXX) $(CXXFLAGS) tests/tests-part2.cpp
+tests-bfs.o : tests/bfs_tests.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) tests/bfs_tests.cpp
+
+tests-forcedirected.o : tests/forcedirected_tests.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) tests/forcedirected_tests.cpp
+
+tests-pagerank.o : tests/pagerank_tests.cpp cs225/catch/catch.hpp Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) tests/pagerank_tests.cpp
+
 
 clean :
 	-rm -f *.o $(EXENAME) test
