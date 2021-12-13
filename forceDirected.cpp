@@ -92,7 +92,7 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
  */
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
-    
+    //draws vertices based on layout inputted
     cs225::PNG* png = new cs225::PNG(output->width(), output->height());
     for(unsigned int x = 0; x < output->width(); x++) {
         for(unsigned int y = 0; y < output->height(); y++) {
@@ -100,7 +100,7 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
                 double ox = it.second.first;
                 double oy = it.second.second;
                 double d = sqrt(pow((ox - x), 2) + pow((oy - y), 2));
-                //make vertices into circle
+                //make vertices into circle of radius 10 pixels
                 if(abs(d) < 10) {
                     cs225::HSLAPixel & pixel = png->getPixel(x, y);
                     pixel.l = 0;
@@ -119,20 +119,20 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
             //coordinates of adjacent vertex in layout
             int c = layout[v2->name_].first;
             int d = layout[v2->name_].second;
-            //slope of line btwn the two points
-            //double m = (y2 - y1 / (x2 - x1);
-            //double b = 
             int count = 0;
             for(int x = 0; x < (int) output->width(); x++) {
                 for(int y = 0; y < (int) output->height(); y++) {
                     //all pixels on the line between the two points become black
                     if(abs((c-a)*(y-b)-(d -b)*(x-a)) < 500) {
+                        //increments count when the first vertex is reached
                         if((x == a && y == b)) {
                             count++;
                         }
+                        //increments count when the second vertex is reached
                         if((x == c && y == d)) {
                             count++;
                         }
+                        //only draws the line when it is between the two vertices
                         if(count == 1) {
                             cs225::HSLAPixel & pixel2 = png->getPixel(x, y);
                             pixel2.l = 0;
