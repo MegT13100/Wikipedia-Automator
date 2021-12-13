@@ -115,8 +115,6 @@ Graph* constructGraph(const string& filename, const string& filename2, int nData
     // Construct graph
     vector<Vertex*> vertices;
     string line;
-    int count = 0;
-
     // read in the file with all of the vertex names
     // the index of the vertex name in the vector is the vertex number it is in the adjacency matrix
     // code for reading and opening a file
