@@ -35,6 +35,7 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* g) {
             positions.insert({v->name_, make_pair(x,y)});
             // positions.insert({v.name_,inputs; });
         } else {
+            
             pair<int,int> point = pickPoint(output);
             positions[v->name_] = point;
 
@@ -43,6 +44,7 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* g) {
 
     return positions;
 }
+
 /**
  * @brief This is a helper function to determine the initial layout. It is meant to find valid x and y values for each point 
  *         such that each point does not overlap (each point has a radius of 5px) and that they are not less that 5px apart. 
@@ -69,14 +71,18 @@ pair<int,int> GraphVisualization::pickPoint(cs225::PNG* output) {
             int dist = sqrt(pow(val.first - x, 2) + pow(val.second - y, 2));
             if (dist < 15) {
                 return pickPoint(output);
-            }
-            
+            }   
         }
     }
-
     return make_pair(x,y);  
-
 }
+
+/**
+ * @brief Draws the graph layout onto a PNG, in order to be written into a visual file.
+ * 
+ * @param layout The map of vertex coordinates used to visualize the graph
+ * @return cs225::PNG* 
+ */
 
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
     cs225::PNG * png = output;
@@ -106,7 +112,6 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
  * @return map<string, pair<int, int>> : a map between the vertex names and the new positions 
  */
 
-
 map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
                                                              int maxIter, int length, float cooling) {
     vector<Vertex*> vertices = g->getVertices();
@@ -124,7 +129,7 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
     map<string, pair<int, int>> forceLayout;
 
     // keep iterating until we've hit the maximum number of iterations, or the cooling factor hits 0
-    for (unsigned int i = 1; i < maxIter && cooling > 0; i++) {
+    for (int i = 1; i < maxIter && cooling > 0; i++) {
         for (Vertex* u : vertices) {
             // the total force to move u = "sum of all repulsive forces" + "sum of attractive forces from adjacent vertices"
 
