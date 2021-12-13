@@ -55,9 +55,7 @@ class GraphVisualization {
          */
         cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
     private:
-        // randomly picks a valid point within the space
         Graph * g;
-        pair<int,int> pickPoint(cs225::PNG* output);
         /**
          * @brief map that holds the initial randomized positions for each vertex in the graph. Maps the names of the
          *        vertices to (x,y) coordinates 
@@ -67,6 +65,8 @@ class GraphVisualization {
          * @brief a PNG that holds a visualization of the graph
          */
         cs225::PNG * output;
-        map<string, pair<int,int>> visited;
+        /**
+        * Picks a random seed based on the current time. Set once at creation of the visualization.
+        */
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 };
