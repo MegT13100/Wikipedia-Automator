@@ -33,7 +33,7 @@
 - Finding the Shortest Path
     * Construct a graph
     * Create a BFS traversal object
-    * Run shortestPath on the BFS object
+    * Run ***shortestPath*** on the BFS object
         * Input: 3 parameters
             * pointer to the the graph
             * string name of the first vertex between which the path should be found
@@ -44,10 +44,10 @@
 - Visualizing the Graph
     * Construct a graph
     * Create a GraphVisualization object
-    * run initialLayout on the GraphVisualization object
+    * run ***initialLayout*** on the GraphVisualization object
         * Input: pointer to the graph
         * Output: map from strings to a pair of integers or the "layout" of the graph
-    * run drawGraph on the GraphVisualization object
+    * run ***drawGraph*** on the GraphVisualization object
         * Input: map from strings to a pair of integers or the "layout" of the graph
         * Output: png of the drawn graph
     * Write the PNG into a file and visualize
@@ -55,7 +55,7 @@
 - Visualizing the Force Directed Graph
     * Construct a graph
     * Create a GraphVisualization object
-    * run initialLayout on the GraphVisualization object
+    * run ***initialLayout*** on the GraphVisualization object
         * Input: pointer to the graph
         * Output: map from strings to a pair of integers or the "layout" of the graph
     * run constructForceDirectedGraph on the GraphVisualization object
@@ -66,7 +66,7 @@
             * int length (we reccomend 101)
             * int cooling factor (we reccomend 1)
         * Output: map from strings to a pair of integers or the "layout" of the force directed graph   
-    * run drawGraph on the GraphVisualization object
+    * run ***drawGraph*** on the GraphVisualization object
         * Input: map from strings to a pair of integers or the "layout" of the force directed graph   
         * Output: png of the drawn force directed graph
     * Write the PNG into a file and visualize
