@@ -41,14 +41,14 @@ vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
 
     for (size_t itr = 0; itr < num_iterations; ++itr) {
         for (int i = 0; i < num_v; ++i) {
-            int sum = 1 - d;
+            int sum = 0;
             for (int vertex_index : inbound_links[i]) {
                 int num_outgoing_links = graph_->getVertices()[vertex_index]->degree_;
                 if (num_outgoing_links > 0) {
                     sum += prev[vertex_index] / num_outgoing_links;
                 }
             }
-            curr[i] = d * sum;
+            curr[i] = (1 - d) / num_v + d * sum;
         }
         prev = curr;
     }

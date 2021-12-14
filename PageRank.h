@@ -41,6 +41,5 @@ class PageRank {
         double** CreateMatrix();
 
     private:
-        // The graph that we use 
         Graph* graph_;
 };
