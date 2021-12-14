@@ -114,3 +114,4 @@
         * Checks if pagerank is displayed and mapped correctly by printing in the terminal
 
 * Link to our presentation: https://youtu.be/bxtoMwxE_pc 
+* Link to project report: https://docs.google.com/document/d/1kpvtZIzQ16VOYJqTfBmh5VaksEa57m3Wt3HV2TIFw3w/edit?usp=sharing 
