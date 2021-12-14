@@ -1,25 +1,9 @@
 #include "PageRank.h"
 
-PageRank::PageRank(Graph* g) : graph_(g) { }
+#include <algorithm>
+#include <math.h>
 
-/*
-    Creates a matrix representation of the probabilities
-*/
-double** PageRank::CreateMatrix() {
-    int num_v = graph_->getNumV();
-    double** matrix = new double*[num_v];
-    for (int i = 0; i < num_v; ++i) { // row
-        matrix[i] = new double[num_v];
-        for (int j = 0; j < num_v; ++j) { // col
-            if (i != j && graph_->adjMatrix[i][j]) {
-                matrix[i][j] = 1 / (double)(graph_->getVertices()[j]->degree_);
-            } else {
-                matrix[i][j] = 0;
-            }
-        }
-    }
-    return matrix;
-}
+PageRank::PageRank(Graph* g) : graph_(g) { }
 
 /*
     Returns the PageRanks of the vertices as a list (in order of the vertex indices)
@@ -75,6 +59,36 @@ map<int, vector<int>> PageRank::GetInboundLinks() {
     return inbound_links;
 }
 
-// ADD SMALL VISUALIZATION OR THING
-// method that takes in a weblink and returns the relative importance of it 
-// so takes in an edge and returns its pagerank 
+// Comparison function for PrintPageRanks sorting
+bool cmp(pair<string, double>& a, pair<string, double>& b) {
+    return a.second > b.second;
+}
+
+void PageRank::PrintPageRanks(vector<double> page_ranks) {
+    map<string, double> map = MapPageRanks(page_ranks);
+
+    vector<pair<string, double>> ranking;
+
+    for (auto& pair : map) {
+        ranking.push_back(pair);
+    }
+
+    sort(ranking.begin(), ranking.end(), cmp);
+
+    cout << "PageRanks (highest to lowest)" << endl;
+    int rank = 1;
+    for (auto& pair : ranking) {
+        cout << rank << ". " << pair.first << " " << pair.second << endl;
+        rank++;
+    }
+}
+
+map<string, double> PageRank::MapPageRanks(vector<double> page_ranks) {
+    map<string, double> map;
+
+    for (size_t i = 0; i < page_ranks.size(); ++i) {
+        map[graph_->vertices[i]->name_] = page_ranks[i];
+    }
+
+    return map;
+}
