@@ -74,3 +74,7 @@ map<int, vector<int>> PageRank::GetInboundLinks() {
 
     return inbound_links;
 }
+
+// ADD SMALL VISUALIZATION OR THING
+// method that takes in a weblink and returns the relative importance of it 
+// so takes in an edge and returns its pagerank 
