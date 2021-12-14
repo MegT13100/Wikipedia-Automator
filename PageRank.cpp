@@ -41,22 +41,14 @@ vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
 
     for (size_t itr = 0; itr < num_iterations; ++itr) {
         for (int i = 0; i < num_v; ++i) {
-<<<<<<< HEAD
-            int sum = d;
-=======
             int sum = 1 - d;
->>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
             for (int vertex_index : inbound_links[i]) {
                 int num_outgoing_links = graph_->getVertices()[vertex_index]->degree_;
                 if (num_outgoing_links > 0) {
                     sum += prev[vertex_index] / num_outgoing_links;
                 }
             }
-<<<<<<< HEAD
-            curr[i] = sum * d;
-=======
             curr[i] = d * sum;
->>>>>>> 260158841ed06f53dd4061c04443cc7fed8d5393
         }
         prev = curr;
     }
@@ -82,6 +74,11 @@ map<int, vector<int>> PageRank::getInboundLinks() {
 
     return inbound_links;
 }
+
+// ADD SMALL VISUALIZATION OR THING
+// method that takes in a weblink and returns the relative importance of it 
+// so takes in an edge and returns its pagerank 
+
 
 /*
     NOTE: Not using currently
