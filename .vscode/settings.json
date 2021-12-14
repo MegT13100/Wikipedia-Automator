@@ -3,6 +3,9 @@
         "iostream": "cpp",
         "vector": "cpp",
         "string": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "cmath": "cpp"
     }
 }

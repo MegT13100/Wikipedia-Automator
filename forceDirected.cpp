@@ -19,7 +19,6 @@ using namespace std;
  * @param g Graph to be visualized. 
  * @return map<string, pair<int,int>> Returns a map of vertex names and coordinates (x,y)
  */
-
 map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
     // set changing seed 
     //srand(time(0));
@@ -67,7 +66,6 @@ map<string, pair<int,int>> GraphVisualization::initialLayout(Graph* graph) {
  * @param layout The map of vertex coordinates used to visualize the graph
  * @return cs225::PNG* 
  */
-
 cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
     //draws vertices based on layout inputted
     cs225::PNG* png = new cs225::PNG(output->width(), output->height());
@@ -136,7 +134,6 @@ cs225::PNG* GraphVisualization::drawGraph(map<string, pair<int, int>> layout) {
  *                 less each iteration
  * @return map<string, pair<int, int>> : a map between the vertex names and the new positions 
  */
-
 map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<string, pair<int, int>> layout, Graph* g,
                                                              int maxIter, int length, float cooling) {
     vector<Vertex*> vertices = g->getVertices();
@@ -218,7 +215,6 @@ map<string, pair<int, int>> GraphVisualization::constructForceDirectedGraph(map<
  * 
  * @return map<string, pair<int,int>> Map of vertex names to (x,y) coordinates
  */
-
 map<string, pair<int,int>> GraphVisualization::getPositions() {
     return positions;
 }

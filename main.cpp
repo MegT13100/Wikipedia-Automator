@@ -3,6 +3,7 @@
 #include "Graph.h"
 #include "BFS.h"
 #include "forceDirected.h"
+#include "PageRank.h"
 #include <string>
 
 //to run main run ./graph
@@ -12,15 +13,20 @@
 using namespace std;
 int main() {
    cout << "main running" << endl;
-   //Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt", 3);
-   //Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
-   Graph* g = constructGraph("data/wiki-v.txt", "data/wiki-e.txt", 50);
+   // Graph* g = constructGraph("data/wiki-topcats-page-names.txt", "data/wiki-topcats.txt", 10000);
+   // Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
+   Graph* g = constructGraph("data/wiki-v.txt", "data/wiki-e.txt", 5000);
+
+   // PageRank
+   PageRank page_rank(g);
+   page_rank.PrintPageRanks(page_rank.FindPageRanks(0.85, 5000));
+
    cout << "graph constructed . . ." << endl;
    GraphVisualization v;
    cout << "graph visualization created . . ." << endl;
    //BFS b(g);
    //b.traverse(g, g->getVertices()[2]);
-   //string solution = b.shortestPath(g, "Arkansas Highway 99", "Lower Parker School");
+   //string solution = b.shortestPath(g, "Article 1", "Article 2");
    map<string, pair<int, int>> layout = v.initialLayout(g);
    cs225::PNG * png = v.drawGraph(layout);
    png->writeToFile("graph.png");
