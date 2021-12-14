@@ -71,22 +71,47 @@
         * Output: png of the drawn force directed graph
     * Write the PNG into a file and visualize
 
-- Running Page Rank
-    * 
+- Finding the Page Rank of Vertices
+    * The input data of Pagerank is a directed graph and the output is a sorted list of vertices associated with their pageranks. 
+    * Finding the page rank of vertices has several steps. However, it is based off of an equation which can be found here: https://en.wikipedia.org/wiki/PageRank#Simplified_algorithm. 
+    * run ***FindPageRanks**    
+        * Input:
+            * Dampaning factor d which is usually set to 0.85
+            * Number of iterations planned to happen 
+        * Output: 
+            * A vector of doubles representing the page rank of all the vertices in the graph
+    * Finding the Inbound Links 
+        * The inbound links are the links that point to a specified vertex. For example if the vertex B pointed to the vertex A, then an inbound link of A would be B. In pagerank, a helper method was written to help find the inbound links.    
+        * run ***GetInboundLinks***
+            * Input: N/A
+            * Output: a map where int values representing the vertex are mapped to their inbound links in the form of a int vector.
+    * Displaying Page Rank
+        * After created a list of pageranks, they were mapped to their respected vertice and printed in the consel. 
+        * run ***MapPageRanks***
+            * Input: a double vector representing the list of page ranks
+            * Output: a map of string to doubles, where the string is a vertex and the double is it's pagerank number
+        * run ***PrintPageRanks***
+            * Input: a double vector representing the list of page ranks, sorts them from highest to lowest
+            * Output: void
 
+    
 ### (3) Full instructions how to build and run your test suite, including a general description on what tests you have created. It is in your best interest to make the instructions (and the running of your executables and tests) as simple and straightforward as possible.
 - Making and running tests
+    * run make
     * run make test
     * run ./test
+    * use tags to specify test cases if needed, ex: [pagerank] or [BFS]
 - Content of tests
-    * graph_tests: makes sure that files are properly read and organized into a graph with correct vertices and edges
-        * 
-        *
-    * bfs_tests: makes sure that graph traversal and shortest path returns the correct path for a anumber of edge cases
-        *
-        *
-    * forcedirected_tests: makes sure that the visualization matches the computation and that all vertices are run
-        *
-        *
-    * pagerank_tests: the test suite for the pagerank algorithm tests every method in the cpp file. Each test begins by creating a graph, setting the correct solution, and then comparing the correct solution to the solution outputted by the method in pagerank. 
-        * 
+    * graph_tests: the test suite for Graph.cpp ensures that files are properly read and organized into a graph with correct vertices and edges. Each test creates a graph based on fake data and checks if the correct vertices/edges are added.
+        * Checks if edges are added correctly to the graph
+        * Checks if vertices are added correctly to the graph
+    * bfs_tests: makes sure that graph traversal and shortest path returns the correct path for a number of edge cases. Each test starts by creating a graph, and checks if the shortest path found is correct.
+        * Checks if shortest path is found correctly on a fake dataset
+    * forcedirected_tests: the test suite for forceDirected.cpp makes sure that the visualization matches the computation and that all vertices are present on the graph. Note: force directed was tested visually and in main.
+    * pagerank_tests: the test suite for the pagerank algorithm tests every method in the PageRank.cpp file. Each test begins by creating a graph, setting the correct solution, and then comparing the correct solution to the solution outputted by the method in pagerank. 
+        * Checks if the calculated pageranks are correct
+        * Checks if the inbound vertices are correct
+        * Checks if pagerank is displayed and mapped correctly by printing in the terminal
+
+* Link to our presentation: https://youtu.be/bxtoMwxE_pc 
+* Link to project report: https://docs.google.com/document/d/1kpvtZIzQ16VOYJqTfBmh5VaksEa57m3Wt3HV2TIFw3w/edit?usp=sharing 

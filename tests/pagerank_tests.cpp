@@ -34,7 +34,7 @@ TEST_CASE("Test FindPageRanks()", "[pagerank][1]") {
     }
 }
 
-TEST_CASE("Test GetInboundLinks()", "[pagerank][4]") {
+TEST_CASE("Test GetInboundLinks()", "[pagerank][2]") {
     Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     PageRank page_rank(g);
     map<int, vector<int>> correct_inbound_links;
@@ -55,6 +55,10 @@ TEST_CASE("Test GetInboundLinks()", "[pagerank][4]") {
     REQUIRE(correct_inbound_links == inbound_links);
 }
 
-TEST_CASE("Returns ordered list", "[pagerank][5]") {
-    //Graph* g = constructGraph("data/pr_data_v.txt.txt", "data/pr_data_v.txt.txt");
+TEST_CASE("Test MakeMaze", "[pagerank][3]") {
+    Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
+    PageRank page_rank(g);
+    vector<double> vector_from_method = page_rank.FindPageRanks(0.85, 5);
+
+    page_rank.PrintPageRanks(vector_from_method);
 }
