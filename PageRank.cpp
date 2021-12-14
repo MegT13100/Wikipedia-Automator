@@ -67,6 +67,8 @@ map<int, vector<int>> PageRank::GetInboundLinks() {
         inbound_links[i] = vector<int>();
     }
 
+    cout << graph_->getEdgeList().size() << endl;
+
     // v is the destination vertex of an edge and u is the source vertex of an edge
     for (Edge* edge : graph_->getEdgeList()) {
         inbound_links[edge->v.index_].push_back(edge->u.index_);
