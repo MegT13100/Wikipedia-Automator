@@ -80,6 +80,13 @@
     * run ./test
 - Content of tests
     * graph_tests: makes sure that files are properly read and organized into a graph with correct vertices and edges
+        * 
+        *
     * bfs_tests: makes sure that graph traversal and shortest path returns the correct path for a anumber of edge cases
+        *
+        *
     * forcedirected_tests: makes sure that the visualization matches the computation and that all vertices are run
-    * pagerank_tests
+        *
+        *
+    * pagerank_tests: the test suite for the pagerank algorithm tests every method in the cpp file. Each test begins by creating a graph, setting the correct solution, and then comparing the correct solution to the solution outputted by the method in pagerank. 
+        * 
