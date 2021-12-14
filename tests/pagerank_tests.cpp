@@ -25,7 +25,6 @@ TEST_CASE("Test FindPageRanks()", "[pagerank][1]") {
     PageRank page_rank(g);
     vector<double> vector_from_method = page_rank.FindPageRanks(0.85, 5);
 
-    std::cout << vector_from_method.size() << std::endl;
 
     for (unsigned i = 0; i < correct_vector.size(); i++) { 
         double scale = 0.1;
