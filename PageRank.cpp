@@ -37,18 +37,18 @@ vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
     // 1/n for every vector, where n is the number of vectors
     vector<double> curr(num_v, 0);
     vector<double> prev(num_v, 1 / num_v);
-    map<int, vector<int>> inbound_links = getInboundLinks();
+    map<int, vector<int>> inbound_links = GetInboundLinks();
 
     for (size_t itr = 0; itr < num_iterations; ++itr) {
         for (int i = 0; i < num_v; ++i) {
-            int sum = 1 - d;
+            int sum = 0;
             for (int vertex_index : inbound_links[i]) {
                 int num_outgoing_links = graph_->getVertices()[vertex_index]->degree_;
                 if (num_outgoing_links > 0) {
                     sum += prev[vertex_index] / num_outgoing_links;
                 }
             }
-            curr[i] = d * sum;
+            curr[i] = (1 - d) / num_v + d * sum;
         }
         prev = curr;
     }
@@ -59,7 +59,7 @@ vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
 /*
     Maps a vertex A's index to a list of vertices (their indices) that link to A
 */
-map<int, vector<int>> PageRank::getInboundLinks() {
+map<int, vector<int>> PageRank::GetInboundLinks() {
     map<int, vector<int>> inbound_links;
     
     // initialize the map
@@ -78,15 +78,3 @@ map<int, vector<int>> PageRank::getInboundLinks() {
 // ADD SMALL VISUALIZATION OR THING
 // method that takes in a weblink and returns the relative importance of it 
 // so takes in an edge and returns its pagerank 
-
-
-/*
-    NOTE: Not using currently
-
-    PR_{t+1} = H PR_t
-*/
-void PageRank::PowerMethod(double** matrix) {
-    // Initial page rank assigned to every page
-    // 1/n for every vector, where n is the number of vectors
-    vector<double> vector(graph_->getNumV(), 1 / graph_->getNumV());
-}
