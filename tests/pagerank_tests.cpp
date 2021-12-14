@@ -10,7 +10,7 @@ using cs225::HSLAPixel;
 using cs225::PNG;
 
 TEST_CASE("Constructs Matrix Correctly", "[pagerank][1]") {
-    Graph* g = constructGraph("test_data2_pagerank.txt", "test_data2_pagerank.txt", 100);
+    Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     int num_v = g->getNumV();
     double **correct_matrix = new double*[num_v];
 
@@ -53,7 +53,7 @@ TEST_CASE("Constructs Matrix Correctly", "[pagerank][1]") {
 }
 
 TEST_CASE("Constructs Matrix Correctly Part 2", "[pagerank][2]") {
-    Graph* g = constructGraph("test_data_pagerank.txt", "test_data_pagerank.txt", 100);
+    Graph* g = constructGraph("data/pr_data_v.txt.txt", "data/pr_data_e.txt", 100);
     int num_v = g->getNumV();
     double **correct_matrix = new double*[num_v];
     // set this to the correct answer and then run the actual method
@@ -70,7 +70,7 @@ TEST_CASE("Constructs Matrix Correctly Part 2", "[pagerank][2]") {
 }
 
 TEST_CASE("Test Columns Add to 1", "[pagerank][3]") {
-    Graph* g = constructGraph("test_data2_pagerank.txt", "test_data2_pagerank.txt", 100);
+    Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     int num_v = g->getNumV();
 
     // run actual pagerank method
@@ -95,7 +95,7 @@ TEST_CASE("Test Columns Add to 1", "[pagerank][3]") {
 }
 
 TEST_CASE("Test Columns Add to 1 Part 2", "[pagerank][4]") {
-Graph* g = constructGraph("test_data1_pagerank.txt", "test_data1_pagerank.txt", 100);
+Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     int num_v = g->getNumV();
 
     // run actual pagerank method
@@ -121,7 +121,7 @@ Graph* g = constructGraph("test_data1_pagerank.txt", "test_data1_pagerank.txt", 
 
 TEST_CASE("Test FindPageRanks()", "[pagerank][5]") {
     // make graph
-    Graph* g = constructGraph("test_data_pagerank.txt", "test_data_pagerank.txt", 100);
+    Graph* g = constructGraph("data/pr_data_v.txt.txt", "data/pr_data_e.txt", 100);
     vector<double> correct_vector;
 
     // set this to the correct answer and then run the actual method
@@ -148,7 +148,7 @@ TEST_CASE("Test FindPageRanks()", "[pagerank][5]") {
 
 TEST_CASE("Test FindPageRanks() Part 2", "[pagerank][6]") {
     // make graph
-    Graph* g = constructGraph("test_data2_pagerank.txt", "test_data2_pagerank.txt", 100);
+    Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     vector<double> correct_vector;
 
     // set this to the correct answer and then run the actual method
@@ -174,17 +174,27 @@ TEST_CASE("Test FindPageRanks() Part 2", "[pagerank][6]") {
 }
 
 TEST_CASE("Test getInboundLinks()", "[pagerank][7]") {
-    Graph* g = constructGraph("test_data2_pagerank.txt", "test_data2_pagerank.txt", 100);
+    Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     PageRank page_rank(g);
     map<int, vector<int>> correct_inbound_links;
 
+    for (auto pair : page_rank.GetInboundLinks()) {
+        cout << "Vector index: " << pair.first << endl;
+        cout << "Inbound links: ";
+        for (auto v_index : pair.second) {
+            cout << v_index << " ";
+        }
+        cout << endl;
+    }
+
+    REQUIRE(true == false);
 }
 
 
 TEST_CASE("Test getInboundLinks() Part 2", "[pagerank][8]") {
-    //Graph* g = constructGraph("test_data_pagerank.txt", "test_data_pagerank.txt");
+    //Graph* g = constructGraph("data/pr_data_v.txt.txt", "data/pr_data_v.txt.txt");
 }
 
 TEST_CASE("Test pagerank on small dataset", "[pagerank][11]") {
-    //Graph* g = constructGraph("test_data_pagerank.txt", "test_data_pagerank.txt");
+    //Graph* g = constructGraph("data/pr_data_v.txt.txt", "data/pr_data_v.txt.txt");
 }

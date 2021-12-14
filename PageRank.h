@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Graph.h"
 #include <map>
+#include "Graph.h"
 
 /**
  * The PageRank algorithm measures the importance of the Wikipedia links,
