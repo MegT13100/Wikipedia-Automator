@@ -5,7 +5,7 @@ PageRank::PageRank(Graph* g) : graph_(g) { }
 /*
     Creates a matrix representation of the probabilities
 */
-double** PageRank::CreateMatrix() {
+double** PageRank::CreateMatrix() { // Creates the L matrix
     int num_v = graph_->getNumV();
     double** matrix = new double*[num_v];
     for (int i = 0; i < num_v; ++i) { // row
@@ -30,7 +30,7 @@ double** PageRank::CreateMatrix() {
     - C(T_i) is the number of outbound links on page T_i
     - d is a damping factor which can be set between 0 and 1 (usually 0.85)
 */
-vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
+vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) { 
     int num_v = graph_->getNumV();
 
     // Initial page rank assigned to every page

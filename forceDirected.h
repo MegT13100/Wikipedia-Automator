@@ -54,6 +54,7 @@ class GraphVisualization {
          * @return cs225::PNG* 
          */
         cs225::PNG* drawGraph(map<string, pair<int, int>> layout);
+        
     private:
         Graph * g;
         /**
