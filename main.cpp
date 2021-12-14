@@ -14,12 +14,12 @@ using namespace std;
 int main() {
    cout << "main running" << endl;
    
-   Graph* g = constructGraph("data/fake_data_v.txt", "data/fake_data_e.txt", 10);
+   Graph* g = constructGraph("data/wiki-v.txt", "data/wiki-e.txt", 500);
    cout << "graph constructed . . ." << endl
 
    // // PageRank
    PageRank page_rank(g);
-   page_rank.PrintPageRanks(page_rank.FindPageRanks(0.85, 5000));
+   page_rank.PrintPageRanks(page_rank.FindPageRanks(0.85, 500));
 
    // BFS
    BFS b(g);
