@@ -55,3 +55,11 @@ TEST_CASE("Test GetInboundLinks()", "[pagerank][2]") {
 
     REQUIRE(correct_inbound_links == inbound_links);
 }
+
+TEST_CASE("Test MakeMaze", "[pagerank][3]") {
+    Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
+    PageRank page_rank(g);
+    vector<double> vector_from_method = page_rank.FindPageRanks(0.85, 5);
+
+    page_rank.PrintPageRanks(vector_from_method);
+}
