@@ -107,10 +107,10 @@
         * Checks if vertices are added correctly to the graph
     * bfs_tests: makes sure that graph traversal and shortest path returns the correct path for a number of edge cases. Each test starts by creating a graph, and checks if the shortest path found is correct.
         * Checks if shortest path is found correctly on a fake dataset
-    * forcedirected_tests: the test suite for forceDirected.cpp makes sure that the visualization matches the computation and that all vertices are present on the graph. Note: force directed was primarily tested visually.
-        * Tests if vertices are the correct color
-        * Checks if every vertex in the data is in the graph
+    * forcedirected_tests: the test suite for forceDirected.cpp makes sure that the visualization matches the computation and that all vertices are present on the graph. Note: force directed was tested visually and in main.
     * pagerank_tests: the test suite for the pagerank algorithm tests every method in the PageRank.cpp file. Each test begins by creating a graph, setting the correct solution, and then comparing the correct solution to the solution outputted by the method in pagerank. 
         * Checks if the calculated pageranks are correct
         * Checks if the inbound vertices are correct
-        * Checks if pagerank is displayed and mapped correctly
+        * Checks if pagerank is displayed and mapped correctly by printing in the terminal
+
+* Link to our presentation: https://youtu.be/bxtoMwxE_pc 

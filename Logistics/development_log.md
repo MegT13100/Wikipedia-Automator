@@ -20,3 +20,5 @@
 * Began PageRank implementation and test cases
 
 ### Week 12/13
+* added final touches to project
+* recorded presentation

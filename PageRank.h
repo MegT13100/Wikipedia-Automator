@@ -39,8 +39,13 @@ class PageRank {
          */
         map<int, vector<int>> GetInboundLinks();
 
+        /**
+        * Maps a vertex to it's pagerank value.
+        *
+        * @param page_ranks the PageRanks calculated by the FindPageRanks method
+        */
+        map<string, double> MapPageRanks(vector<double> page_ranks);
+
     private:
         Graph* graph_;
-
-        map<string, double> MapPageRanks(vector<double> page_ranks);
 };
