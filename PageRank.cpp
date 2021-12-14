@@ -78,6 +78,7 @@ void PageRank::PrintPageRanks(vector<double> page_ranks) {
     cout << "PageRanks (highest to lowest)" << endl;
     int rank = 1;
     for (auto& pair : ranking) {
+        if (rank > 100) break;
         cout << rank << ". " << pair.first << " " << pair.second << endl;
         rank++;
     }
