@@ -27,19 +27,20 @@ class PageRank {
         vector<double> FindPageRanks(double d, size_t num_iterations);
 
         /**
+         * Prints the sorted PageRank ordering (from highest to lowest) of the vertices on the Graph
+         * 
+         * @param page_ranks the PageRanks calculated by the FindPageRanks method
+         */
+        void PrintPageRanks(vector<double> page_ranks);
+
+        /**
          * Maps a vertex A's index to a list of vertices (their indices)
          * that link to A for all vertices in the Graph
          */
         map<int, vector<int>> GetInboundLinks();
 
-        /*
-         * Creates a matrix representation for the probabilities of a Random Surfer Model.
-         * Initially creates a N * N matrix which marks basic probabilities where there are
-         * edges between vertices.
-         * NOTE: the probabilities denote how likely a Surfer would click on a following link.
-         */
-        double** CreateMatrix();
-
     private:
         Graph* graph_;
+
+        map<string, double> MapPageRanks(vector<double> page_ranks);
 };
