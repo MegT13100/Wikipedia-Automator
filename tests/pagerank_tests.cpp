@@ -173,19 +173,15 @@ TEST_CASE("Test FindPageRanks() Part 2", "[pagerank][6]") {
     REQUIRE(correct_vector == vector_from_method);
 }
 
-TEST_CASE("Test getInboundLinks()", "[pagerank][7]") {
+TEST_CASE("Test GetInboundLinks()", "[pagerank][7]") {
     Graph* g = constructGraph("data/pr_data_v.txt", "data/pr_data_e.txt", 100);
     PageRank page_rank(g);
     map<int, vector<int>> correct_inbound_links;
 
-    for (auto pair : page_rank.GetInboundLinks()) {
-        cout << "Vector index: " << pair.first << endl;
-        cout << "Inbound links: ";
-        for (auto v_index : pair.second) {
-            cout << v_index << " ";
-        }
-        cout << endl;
-    }
+    // for (auto pair : page_rank.GetInboundLinks()) {
+    //     for (auto v_index : pair.second) {
+    //     }
+    // }
 
     REQUIRE(true == false);
 }

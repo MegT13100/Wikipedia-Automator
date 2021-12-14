@@ -47,21 +47,23 @@ bool containsEdge(Graph const * const g, int src, int dest) {
 void addEdge(Graph* g, int src, int dest) {
     // Add an edge between the given vertices
     // NOTE: since this is a directed graph, we only need to add in to the source
-    if(src >= g->getNumV() || src >= g->getNumV()) {
+    if (src >= g->getNumV() || src >= g->getNumV()) {
         return;
     }
+
     Edge* edge = new Edge(*g->getVertices()[src], *g->getVertices()[dest]);
+
     //adds edge to adjacency matrix
-    g->getEdges()[src][dest]= edge;
+    g->edges[src][dest]= edge;
 
     //adds edge to the edge list
-    g->getEdgeList().push_back(edge);
+    g->edgeList.push_back(edge);
 
     //Increment the degree of the vertex
-    g->getVertices()[src]->degree_++;
+    g->vertices[src]->degree_++;
 
     //add edge to adjecency list
-    g->getVertices()[src]->adjacent.push_back(g->getVertices()[dest]);
+    g->vertices[src]->adjacent.push_back(g->vertices[dest]);
 
     // Mark as true on the matrix
     g->adjMatrix[src][dest] = 1;

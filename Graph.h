@@ -75,8 +75,7 @@ class Graph {
                 void setEdges(vector<vector<Edge*>> edgs);
                 int getNumV() const;
                 void setNumV(int n_);
-        
-        private:
+
                 //Graph * g;
                 //map<Edge, bool>** adjMatrix;
                 //number of vertices in the graph
@@ -89,6 +88,7 @@ class Graph {
                 vector<vector<Edge*>> edges;
                 //map that contains all the adjacent edges for a given vertex
                 //std::unordered_map<int, vector<Vertex>> adjacent;
+        private:
 };
         /**
          * @brief creates an empty graph with the given number of vertices

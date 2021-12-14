@@ -36,19 +36,19 @@ vector<double> PageRank::FindPageRanks(double d, size_t num_iterations) {
     // Initial page rank assigned to every page
     // 1/n for every vector, where n is the number of vectors
     vector<double> curr(num_v, 0);
-    vector<double> prev(num_v, 1 / num_v);
+    vector<double> prev(num_v, 1.0 / (double)num_v);
     map<int, vector<int>> inbound_links = GetInboundLinks();
 
     for (size_t itr = 0; itr < num_iterations; ++itr) {
         for (int i = 0; i < num_v; ++i) {
-            int sum = 0;
+            double sum = 0;
             for (int vertex_index : inbound_links[i]) {
-                int num_outgoing_links = graph_->getVertices()[vertex_index]->degree_;
+                double num_outgoing_links = double(graph_->vertices[vertex_index]->degree_);
                 if (num_outgoing_links > 0) {
                     sum += prev[vertex_index] / num_outgoing_links;
                 }
             }
-            curr[i] = (1 - d) / num_v + d * sum;
+            curr[i] = ((1 - d) / (double)num_v) + (d * sum);
         }
         prev = curr;
     }
@@ -66,8 +66,6 @@ map<int, vector<int>> PageRank::GetInboundLinks() {
     for (int i = 0; i < graph_->getNumV(); ++i) {
         inbound_links[i] = vector<int>();
     }
-
-    cout << graph_->getEdgeList().size() << endl;
 
     // v is the destination vertex of an edge and u is the source vertex of an edge
     for (Edge* edge : graph_->getEdgeList()) {
